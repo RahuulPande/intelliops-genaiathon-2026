@@ -12,6 +12,11 @@ import ThemeToggle from '@/components/layouts/ThemeToggle';
 import Breadcrumb from '@/components/layouts/Breadcrumb';
 
 import LandingPage from '@/components/landing-page/LandingPage';
+import MarketingLandingPage from '@/components/marketing/MarketingLandingPage';
+// Sprint 22 — Demo mode flattened wrappers
+import DemoDefectIntelligenceSection from '@/components/sections/demo/DemoDefectIntelligenceSection';
+import DemoTestManagementSection from '@/components/sections/demo/DemoTestManagementSection';
+import DemoLandingPage from '@/components/demo/DemoLandingPage';
 import ServiceHealthSection from '@/components/sections/ServiceHealthSection';
 import IntelligentTestQualitySection from '@/components/sections/IntelligentTestQualitySection';
 import ReleaseManagementSection from '@/components/sections/ReleaseManagementSection';
@@ -60,6 +65,9 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
   // Utility
   'tech-docs': TechnicalDocsSection,
   'settings': SettingsSection,
+  // Sprint 22 — Demo mode flattened sections
+  'demo-defect-intelligence': DemoDefectIntelligenceSection,
+  'demo-test-management': DemoTestManagementSection,
 };
 
 // Legacy section ID mapping for backward compatibility
@@ -71,7 +79,14 @@ const legacySectionMapping: Record<string, string> = {
   'overview': 'platform-overview',
 };
 
+// Auth-gated wrapper: unauthenticated users see marketing, authenticated see dashboard
 export default function Dashboard() {
+  const { isAuthenticated } = useAuth();
+  if (!isAuthenticated) return <MarketingLandingPage />;
+  return <DashboardContent />;
+}
+
+function DashboardContent() {
   const { isAdmin } = useAuth();
   const [currentSection, setCurrentSection] = useState('platform-overview');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -388,7 +403,9 @@ export default function Dashboard() {
           {(() => {
             switch (currentSection) {
               case 'platform-overview':
-                return <LandingPage onNavigateToSection={handleSectionChange} />;
+                return isAdmin
+                  ? <LandingPage onNavigateToSection={handleSectionChange} />
+                  : <DemoLandingPage onNavigate={handleSectionChange} />;
               // L0 PLAN
               case 'plan-intelligence':
                 return <RequirementIntelligenceWorkspace />;
@@ -419,6 +436,11 @@ export default function Dashboard() {
                 return <TechnicalDocsSection />;
               case 'settings':
                 return <SettingsSection />;
+              // Sprint 22 — Demo mode flattened sections
+              case 'demo-defect-intelligence':
+                return <DemoDefectIntelligenceSection />;
+              case 'demo-test-management':
+                return <DemoTestManagementSection />;
               default:
                 return <LandingPage onNavigateToSection={handleSectionChange} />;
             }

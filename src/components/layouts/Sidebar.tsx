@@ -6,7 +6,7 @@ import { useMobileResponsive, useSwipeGestures } from '@/lib/hooks/useMobileResp
 import {
   Home, Activity, Brain, Package, Settings, Book, BookOpen, Menu, X,
   ChevronLeft, ChevronRight, ChevronDown, Layers, Lock, LogOut,
-  FileSearch, Code, GraduationCap
+  FileSearch, Code, GraduationCap, TestTube
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -186,12 +186,14 @@ const demoNavigationGroups: NavigationGroup[] = [
     icon: Brain,
     integrations: ['JIRA', 'TestRail', 'Jenkins', 'RAG', 'NLP', 'ML', 'LLM'],
     sections: [
-      { id: 'test-quality-intelligence', name: 'Test & Quality Intelligence', icon: Brain,
-        path: '/test/quality', description: 'AI-powered quality assurance' },
+      { id: 'demo-defect-intelligence', name: 'Defect Intelligence', icon: Brain,
+        path: '/test/defects', description: 'AI defect matching & analytics' },
+      { id: 'demo-test-management', name: 'Test Intelligence', icon: TestTube,
+        path: '/test/management', description: '6 AI-powered test capabilities' },
       { id: 'release-intelligence', name: 'Release Intelligence', icon: Package,
-        path: '/release/risk', description: 'Deployment risk assessment' },
-      { id: 'knowledge-base', name: 'Application Knowledge Base', icon: BookOpen,
-        path: '/release/knowledge-base', description: 'Institutional knowledge from defects & releases' }
+        path: '/release/risk', description: 'Release risk & deployment' },
+      { id: 'knowledge-base', name: 'Knowledge Base', icon: BookOpen,
+        path: '/release/knowledge-base', description: 'Institutional knowledge' }
     ]
   }
 ];
@@ -238,7 +240,7 @@ export default function Sidebar({
   // Role-based layer access: admin unlocks all layers; demo gets TEST (L2) + RELEASE (L3)
   const isLayerAccessible = (groupId: string): boolean => {
     if (isAdmin) return true;
-    return groupId === 'test-intelligence' || groupId === 'release-intelligence';
+    return groupId === 'test-intelligence' || groupId === 'release-intelligence' || groupId === 'delivery-intelligence';
   };
 
   const { touchEventHandlers } = useSwipeGestures({

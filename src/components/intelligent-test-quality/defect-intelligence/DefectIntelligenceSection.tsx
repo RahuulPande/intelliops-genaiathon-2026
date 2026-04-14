@@ -11,7 +11,8 @@ import {
   History,
   TestTube,
   FileText,
-  Sparkles
+  Sparkles,
+  Info
 } from 'lucide-react';
 import AIDefectMatcher from '@/components/dashboard/AIDefectMatcher';
 import DefectAnalytics from '@/components/dashboard/DefectAnalytics';
@@ -20,8 +21,10 @@ import RAGSolutionRecommendations from './RAGSolutionRecommendations';
 import TestReexecutionMonitor from './TestReexecutionMonitor';
 import DocumentationQualityMonitor from './DocumentationQualityMonitor';
 import AIDocumentationAssistant from './AIDocumentationAssistant';
+import FeatureAboutTab from '@/components/demo/FeatureAboutTab';
+import { defectIntelligenceAbout } from '@/lib/content/aboutContent';
 
-type DefectIntelligenceTab = 'defect-matching' | 'defect-analytics' | 'predictions' | 'insights' | 'test-reexecution' | 'documentation-quality' | 'ai-learning';
+type DefectIntelligenceTab = 'defect-matching' | 'defect-analytics' | 'predictions' | 'insights' | 'test-reexecution' | 'documentation-quality' | 'ai-learning' | 'about';
 
 interface DefectIntelligenceSectionProps {
   initialTab?: DefectIntelligenceTab;
@@ -72,6 +75,12 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
       label: 'Solution Recommendations',
       icon: Lightbulb,
       description: 'LLM Insight · RAG-powered resolution recommendations'
+    },
+    {
+      id: 'about',
+      label: 'About',
+      icon: Info,
+      description: 'How Defect Intelligence works and what it needs'
     }
   ];
 
@@ -91,6 +100,8 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
         return <HistoricalDefectAnalysis />;
       case 'insights':
         return <RAGSolutionRecommendations />;
+      case 'about':
+        return <FeatureAboutTab {...defectIntelligenceAbout} />;
       default:
         return <AIDefectMatcher />;
     }
@@ -111,12 +122,12 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
         {/* Quick Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
           <div className="bg-white/10 rounded-lg p-3">
-            <div className="text-2xl font-bold">12,847</div>
+            <div className="text-2xl font-bold">3,247</div>
             <div className="text-sm text-purple-100">Matches Found</div>
             <div className="text-xs text-purple-200">↑ 23% this month</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3">
-            <div className="text-2xl font-bold">2,340h</div>
+            <div className="text-2xl font-bold">680h</div>
             <div className="text-sm text-purple-100">Time Saved</div>
             <div className="text-xs text-purple-200">↑ 18% efficiency</div>
           </div>
@@ -163,7 +174,7 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <div className="text-2xl font-bold text-white mb-2">12,847</div>
+                <div className="text-2xl font-bold text-white mb-2">3,247</div>
                 <div className="text-orange-100 text-sm">Successful Matches</div>
                 <div className="text-orange-200 text-xs mt-1">Across 5 years of data</div>
               </div>
@@ -191,7 +202,7 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
       </motion.div>
 
       {/* Sub-navigation */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 p-1">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1">
           {tabs.map((tab) => {
             const IconComponent = tab.icon;
@@ -206,7 +217,7 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
                 className={`flex items-center space-x-3 p-3 rounded-lg text-left transition-all ${
                   isActive
                     ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg'
-                    : 'text-gray-600 hover:bg-gray-50'
+                    : 'text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-[#242424]'
                 }`}
               >
                 <IconComponent className="w-4 h-4 flex-shrink-0" />
@@ -228,7 +239,7 @@ export default function DefectIntelligenceSection({ initialTab = 'defect-matchin
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+        className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 overflow-hidden"
       >
         {renderContent()}
       </motion.div>
