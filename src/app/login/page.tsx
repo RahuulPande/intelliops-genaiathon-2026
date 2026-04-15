@@ -68,7 +68,7 @@ export default function DemoLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated) router.replace('/');
+    if (isAuthenticated) router.replace('/showcase');
   }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
