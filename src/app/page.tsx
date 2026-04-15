@@ -40,12 +40,12 @@ import { demoScenarios, demoKeyboardShortcuts } from '@/lib/mock-data/scenarios'
 import useDashboardStore from '@/store/dashboard';
 import { useAuth } from '@/context/AuthContext';
 
-import MarketingLandingPage from '@/components/marketing/MarketingLandingPage';
+import DemoLoginPage from '@/app/login/page';
 
-// Auth-gated wrapper: unauthenticated users see marketing, authenticated see dashboard
+// Auth-gated wrapper: unauthenticated users see login, authenticated see dashboard
 export default function Dashboard() {
   const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) return <MarketingLandingPage />;
+  if (!isAuthenticated) return <DemoLoginPage />;
   return <DashboardContent />;
 }
 
