@@ -32,7 +32,6 @@ import {
   TrendingDown,
   Layers3,
 } from 'lucide-react';
-import { authenticateUser, AUTH_STORAGE_KEY } from '@/lib/auth';
 import { useAuth } from '@/context/AuthContext';
 
 // ── SDLC Layer Pills ──────────────────────────────────────
@@ -128,13 +127,12 @@ export default function LoginPage() {
   const [activeCapabilityIndex, setActiveCapabilityIndex] = useState(0);
 
   useEffect(() => {
-    const authStatus = localStorage.getItem(AUTH_STORAGE_KEY);
-    if (authStatus === 'true') {
+    if (alreadyAuth) {
       router.replace('/');
     } else {
       setIsCheckingAuth(false);
     }
-  }, [router]);
+  }, [alreadyAuth, router]);
 
   // Auto-rotate capability cards every 4 seconds
   useEffect(() => {
@@ -149,13 +147,9 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 600));
-
-    const user = authenticateUser(username, password);
-    if (user) {
-      login(user.role);
-    } else {
-      setError('Invalid credentials. Please try again.');
+    const errorMsg = await login(username, password);
+    if (errorMsg) {
+      setError(errorMsg);
       setIsLoading(false);
     }
   };
@@ -392,7 +386,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-2 mb-6">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-semibold border border-purple-200 dark:border-purple-700/50">
               <Lock className="w-3 h-3" />
-              Private Preview — GenAIathon {new Date().getFullYear()}
+              Private Preview
             </span>
           </div>
 

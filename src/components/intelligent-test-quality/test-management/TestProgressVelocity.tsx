@@ -73,7 +73,7 @@ export default function TestProgressVelocity() {
       {/* Header with Controls */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Test Progress & Velocity</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Test Progress & Velocity</h2>
           <p className="text-gray-600">Team performance metrics and velocity tracking</p>
         </div>
         
@@ -116,7 +116,7 @@ export default function TestProgressVelocity() {
       </div>
 
       {/* Velocity Trend Chart */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Velocity Trend</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
@@ -134,7 +134,7 @@ export default function TestProgressVelocity() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Team Velocity */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <h3 className="text-lg font-semibold mb-4">Team Member Velocity</h3>
           <div className="space-y-4">
             {teamVelocity.map((member) => (
@@ -160,7 +160,7 @@ export default function TestProgressVelocity() {
         </div>
 
         {/* Module Progress */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <h3 className="text-lg font-semibold mb-4">Module Progress</h3>
           <div className="space-y-4">
             {moduleProgress.map((module) => (
@@ -193,7 +193,7 @@ export default function TestProgressVelocity() {
       </div>
 
       {/* Daily Test Execution Chart */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Daily Test Execution</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -210,7 +210,7 @@ export default function TestProgressVelocity() {
       </div>
 
       {/* Velocity Insights */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Velocity Insights</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-green-50 rounded-lg p-4">

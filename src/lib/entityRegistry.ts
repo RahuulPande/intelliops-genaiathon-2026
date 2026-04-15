@@ -3,7 +3,7 @@
 // Maps entities (services, PRs, incidents, defects) across SDLC layers,
 // enabling navigation and context display between layers.
 
-export type EntityType = 'service' | 'pr' | 'incident' | 'defect' | 'release' | 'knowledge';
+export type EntityType = 'service' | 'pr' | 'incident' | 'defect' | 'release' | 'knowledge' | 'requirement';
 
 export type SDLCLayer = 'L0-PLAN' | 'L1-BUILD' | 'L2-TEST' | 'L3-RELEASE' | 'L4-OPERATE' | 'L5-LEARN';
 
@@ -74,6 +74,15 @@ export const serviceRegistry: ServiceEntity[] = [
         description: 'RAG-matched defect: recurring timeout pattern detected across payment service test suites.',
         badge: { text: 'RAG Match', color: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' },
       },
+      {
+        id: 'chain-001',
+        type: 'requirement',
+        label: 'Traceability: feat-001 → PR-1201',
+        layer: 'L1-BUILD',
+        sectionId: 'build-intelligence',
+        description: 'Full traceability chain for premium checkout: requirement → PR → tests → deployment.',
+        badge: { text: 'Traced', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' },
+      },
     ],
   },
   {
@@ -99,6 +108,15 @@ export const serviceRegistry: ServiceEntity[] = [
         sectionId: 'learn-intelligence',
         description: 'Identified cache TTL mismatch between auth-gateway and downstream services.',
         badge: { text: 'Learned', color: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' },
+      },
+      {
+        id: 'chain-004',
+        type: 'requirement',
+        label: 'Traceability: feat-004 → PR-1215',
+        layer: 'L1-BUILD',
+        sectionId: 'build-intelligence',
+        description: 'Full traceability chain for auth gateway token refresh refactor: requirement → PR → tests → deployment.',
+        badge: { text: 'Traced', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' },
       },
     ],
   },
@@ -134,6 +152,15 @@ export const serviceRegistry: ServiceEntity[] = [
         sectionId: 'learn-intelligence',
         description: 'Schema migration impact on message queues documented. Model accuracy improved.',
         badge: { text: 'Learned', color: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' },
+      },
+      {
+        id: 'chain-010',
+        type: 'requirement',
+        label: 'Traceability: feat-007 → PR-1245',
+        layer: 'L1-BUILD',
+        sectionId: 'build-intelligence',
+        description: 'Partial traceability chain for distributed cache layer: requirement linked, tests partial, pre-deploy review skipped.',
+        badge: { text: 'Partial', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' },
       },
     ],
   },
@@ -184,4 +211,5 @@ export const entityTypeIcons: Record<EntityType, string> = {
   defect: 'Bug',
   release: 'Package',
   knowledge: 'BookOpen',
+  requirement: 'FileText',
 };

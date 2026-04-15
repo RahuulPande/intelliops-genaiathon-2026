@@ -2,8 +2,14 @@
 
 import React from 'react';
 import { Zap } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 export default function LicenseSelector() {
+  const { isAdmin } = useAuth();
+
+  // Hide the license badge entirely in dev mode — it's a demo/marketing artifact
+  if (isAdmin) return null;
+
   return (
     <div className="flex items-center space-x-3">
       {/* Active License Badge */}
@@ -13,10 +19,7 @@ export default function LicenseSelector() {
         </div>
         <div>
           <div className="text-sm font-semibold text-gray-900 dark:text-white">
-            Delivery Intelligence (L1)
-          </div>
-          <div className="text-xs text-gray-600 dark:text-gray-400">
-            $2,500/month
+            Delivery Intelligence
           </div>
         </div>
       </div>

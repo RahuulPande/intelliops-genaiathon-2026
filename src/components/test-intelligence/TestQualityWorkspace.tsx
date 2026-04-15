@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useAuth } from '@/context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Sparkles, TrendingDown, TrendingUp, Clock, Target, Grid3x3, Activity, CheckCircle, AlertTriangle } from 'lucide-react';
 import TestDetailTabs from './TestDetailTabs';
@@ -16,6 +17,7 @@ const trendConfig: Record<TestSuite['trend'], { bg: string; text: string; icon: 
 
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function TestQualityWorkspace() {
+  const { isAdmin } = useAuth();
   const [selectedId, setSelectedId] = useState<string>(testSuites[0].id);
   const [activeSubTab, setActiveSubTab] = useState<'results' | 'coverage' | 'defects' | 'assessment'>('results');
 
@@ -74,12 +76,14 @@ export default function TestQualityWorkspace() {
 
   return (
     <div className="space-y-6 p-6">
-      {/* Badge */}
-      <div className="flex items-center justify-center">
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-200 dark:shadow-blue-900/40">
-          <Sparkles className="w-3.5 h-3.5" /> Interactive AI Simulation
-        </span>
-      </div>
+      {/* Badge (demo mode only) */}
+      {!isAdmin && (
+        <div className="flex items-center justify-center">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-200 dark:shadow-blue-900/40">
+            <Sparkles className="w-3.5 h-3.5" /> Interactive AI Simulation
+          </span>
+        </div>
+      )}
 
       {/* Test Suite Selector */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">

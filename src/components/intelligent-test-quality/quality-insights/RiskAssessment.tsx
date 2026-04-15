@@ -88,7 +88,7 @@ export default function RiskAssessment() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Active Risk Items</h3>
         <div className="space-y-4">
           {riskItems.map((risk) => (

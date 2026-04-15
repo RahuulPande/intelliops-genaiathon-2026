@@ -17,8 +17,9 @@ import {
 } from 'lucide-react';
 import { releases, type Release } from '@/lib/mock/releaseData';
 import AIOutputPanel from '@/components/shared/AIOutputPanel';
-import CrossLayerLinks from '@/components/shared/CrossLayerLinks';
 import type { AIGenerationResult } from '@/lib/ai/simulatedAI';
+import { useAuth } from '@/context/AuthContext';
+import CABIntelligence from './CABIntelligence';
 
 // ─── Color systems ──────────────────────────────────────────────
 const statusColors: Record<string, { bg: string; text: string; badge: string }> = {
@@ -113,7 +114,14 @@ const generateDeploymentAssessment = (rel: Release): AIGenerationResult => {
 };
 
 // ─── Component ──────────────────────────────────────────────────
-export default function ReleaseExplorerWorkspace() {
+interface ReleaseExplorerWorkspaceProps {
+  showCABTab?: boolean;
+}
+
+export default function ReleaseExplorerWorkspace({ showCABTab = true }: ReleaseExplorerWorkspaceProps) {
+  const { isAdmin } = useAuth();
+  const showCAB = showCABTab && isAdmin;
+  const [activeTab, setActiveTab] = useState<'explorer' | 'cab'>('explorer');
   const [selectedId, setSelectedId] = useState<string>(releases[0].id);
   const rel = releases.find((r) => r.id === selectedId)!;
 
@@ -123,8 +131,37 @@ export default function ReleaseExplorerWorkspace() {
 
   return (
     <div className="space-y-6">
-      {/* Release Selector Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Tab Bar — admin only, only when CAB tab is shown */}
+      {showCAB && (
+        <div className="flex items-center gap-1 border-b border-gray-200 dark:border-gray-700 mb-6">
+          <button
+            onClick={() => setActiveTab('explorer')}
+            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+              activeTab === 'explorer'
+                ? 'bg-rose-500 text-white'
+                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+          >
+            Release Explorer
+          </button>
+          <button
+            onClick={() => setActiveTab('cab')}
+            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+              activeTab === 'cab'
+                ? 'bg-rose-500 text-white'
+                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+          >
+            CAB Intelligence
+          </button>
+        </div>
+      )}
+      {/* CAB Intelligence Tab */}
+      {activeTab === 'cab' && showCAB && <CABIntelligence />}
+
+      {/* Release Explorer Tab */}
+      {(activeTab === 'explorer' || !isAdmin) && (
+      <><div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {releases.map((r) => (
           <motion.button
             key={r.id}
@@ -334,15 +371,9 @@ export default function ReleaseExplorerWorkspace() {
             </div>
           </div>
 
-          {/* Cross-Layer Links */}
-          {rel.services.length > 0 && (
-            <CrossLayerLinks
-              serviceName={rel.services[0]}
-              currentLayer="L3-RELEASE"
-            />
-          )}
         </motion.div>
       </AnimatePresence>
+      </>)}
     </div>
   );
 }

@@ -12,10 +12,10 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 };
 
 const insightTypeStyles: Record<string, { border: string; bg: string; iconColor: string }> = {
-  critical: { border: 'border-red-300 dark:border-red-800', bg: 'bg-red-50 dark:bg-red-900/20', iconColor: 'text-red-500' },
-  warning: { border: 'border-yellow-300 dark:border-yellow-800', bg: 'bg-yellow-50 dark:bg-yellow-900/20', iconColor: 'text-yellow-500' },
-  info: { border: 'border-blue-300 dark:border-blue-800', bg: 'bg-blue-50 dark:bg-blue-900/20', iconColor: 'text-blue-500' },
-  success: { border: 'border-green-300 dark:border-green-800', bg: 'bg-green-50 dark:bg-green-900/20', iconColor: 'text-green-500' },
+  critical: { border: 'border-red-300 dark:border-red-700', bg: 'bg-red-50 dark:bg-red-900/20', iconColor: 'text-red-500' },
+  warning: { border: 'border-yellow-300 dark:border-yellow-700', bg: 'bg-yellow-50 dark:bg-yellow-900/20', iconColor: 'text-yellow-500' },
+  info: { border: 'border-blue-300 dark:border-blue-700', bg: 'bg-blue-50 dark:bg-blue-900/20', iconColor: 'text-blue-500' },
+  success: { border: 'border-green-300 dark:border-green-700', bg: 'bg-green-50 dark:bg-green-900/20', iconColor: 'text-green-500' },
 };
 
 export default function TestAIInsightsPanel() {

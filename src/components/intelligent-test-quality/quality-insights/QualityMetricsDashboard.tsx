@@ -140,7 +140,7 @@ export default function QualityMetricsDashboard() {
       {/* Header with Controls */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Quality Metrics Dashboard</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Quality Metrics Dashboard</h2>
           <p className="text-gray-600">Comprehensive quality scoring and performance metrics</p>
         </div>
         
@@ -199,7 +199,7 @@ export default function QualityMetricsDashboard() {
       </div>
 
       {/* Quality Trend Chart */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Quality Score Trend</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
@@ -218,7 +218,7 @@ export default function QualityMetricsDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Module Quality Breakdown */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <h3 className="text-lg font-semibold mb-4">Module Quality Breakdown</h3>
           <div className="space-y-4">
             {moduleQuality.map((module) => (
@@ -251,7 +251,7 @@ export default function QualityMetricsDashboard() {
         </div>
 
         {/* Quality Distribution */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <h3 className="text-lg font-semibold mb-4">Quality Score Distribution</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -276,7 +276,7 @@ export default function QualityMetricsDashboard() {
       </div>
 
       {/* Quality Gates */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-6">Quality Gates Status</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {qualityGates.map((gate, index) => (
@@ -321,7 +321,7 @@ export default function QualityMetricsDashboard() {
       </div>
 
       {/* Quality Insights */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Quality Insights & Recommendations</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-green-50 rounded-lg p-4">

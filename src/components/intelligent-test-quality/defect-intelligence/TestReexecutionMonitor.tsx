@@ -151,18 +151,18 @@ export default function TestReexecutionMonitor() {
       </div>
 
       {/* Defect-Test Mapping List */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
             <AlertTriangle className="w-5 h-5 text-orange-500 mr-2" />
             Tests Awaiting Re-execution
           </h3>
-          <p className="text-gray-600 text-sm mt-1">
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
             {gaps.length} fixed defects have related test cases that haven't been re-executed
           </p>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-200 dark:divide-gray-800">
           {gaps.map((gap, index) => (
             <motion.div
               key={gap.defectId}
@@ -176,20 +176,20 @@ export default function TestReexecutionMonitor() {
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">
+                      <span className="font-mono text-sm bg-gray-100 dark:bg-[#242424] px-2 py-1 rounded">
                         {gap.defectId}
                       </span>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(gap.riskLevel)}`}>
                         {gap.riskLevel} Risk
                       </span>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
                         Fixed {gap.daysSinceFixed} days ago
                       </span>
                     </div>
-                    <h4 className="text-lg font-medium text-gray-900 mb-1">
+                    <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-1">
                       {gap.defectTitle}
                     </h4>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600">
+                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
                       <div className="flex items-center space-x-1">
                         <User className="w-4 h-4" />
                         <span>Fixed by: {gap.fixedBy}</span>
@@ -201,18 +201,18 @@ export default function TestReexecutionMonitor() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900 rounded-lg p-3 mb-4">
                   <div className="flex items-center space-x-2">
                     <Flag className="w-4 h-4 text-yellow-600" />
-                    <span className="text-sm font-medium text-yellow-800">Business Impact:</span>
-                    <span className="text-sm text-yellow-700">{gap.businessImpact}</span>
+                    <span className="text-sm font-medium text-yellow-800 dark:text-yellow-200">Business Impact:</span>
+                    <span className="text-sm text-yellow-700 dark:text-yellow-200">{gap.businessImpact}</span>
                   </div>
                 </div>
               </div>
 
               {/* Related Test Cases */}
               <div className="space-y-3">
-                <h5 className="font-medium text-gray-900 flex items-center">
+                <h5 className="font-medium text-gray-900 dark:text-white flex items-center">
                   <TestTube className="w-4 h-4 mr-2" />
                   Related Test Cases ({gap.relatedTests.length})
                 </h5>
@@ -220,12 +220,12 @@ export default function TestReexecutionMonitor() {
                 {gap.relatedTests.map((testCase) => (
                   <div
                     key={testCase.testId}
-                    className="bg-gray-50 rounded-lg p-4 border border-gray-200"
+                    className="bg-gray-50 dark:bg-[#141414] rounded-lg p-4 border border-gray-200 dark:border-gray-800"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
-                          <span className="font-mono text-sm bg-white px-2 py-1 rounded border">
+                          <span className="font-mono text-sm bg-white dark:bg-[#242424] px-2 py-1 rounded border dark:border-gray-700">
                             {testCase.testId}
                           </span>
                           <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(testCase.priority)}`}>
@@ -235,8 +235,8 @@ export default function TestReexecutionMonitor() {
                             {testCase.status}
                           </span>
                         </div>
-                        <h6 className="font-medium text-gray-900 mb-2">{testCase.testName}</h6>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+                        <h6 className="font-medium text-gray-900 dark:text-white mb-2">{testCase.testName}</h6>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-400">
                           <div className="flex items-center space-x-1">
                             <Clock className="w-4 h-4" />
                             <span>Last executed: {new Date(testCase.lastExecuted).toLocaleDateString()}</span>
@@ -288,26 +288,26 @@ export default function TestReexecutionMonitor() {
       </div>
 
       {/* Summary Statistics */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Re-execution Health Summary</h3>
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-900">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Re-execution Health Summary</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-red-600">{gapsByPriority.critical}</div>
-            <div className="text-sm text-gray-600">Critical Risk</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Critical Risk</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-orange-600">{gapsByPriority.high}</div>
-            <div className="text-sm text-gray-600">High Risk</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">High Risk</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-yellow-600">{gapsByPriority.medium}</div>
-            <div className="text-sm text-gray-600">Medium Risk</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Medium Risk</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-green-600">
               {Math.round((23 - gaps.length * 2.3) / 23 * 100)}%
             </div>
-            <div className="text-sm text-gray-600">Coverage Health</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Coverage Health</div>
           </div>
         </div>
       </div>

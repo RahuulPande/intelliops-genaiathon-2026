@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { AlertTriangle, BarChart3, Brain, CheckCircle } from 'lucide-react';
 import AIOutputPanel from '@/components/shared/AIOutputPanel';
-import CrossLayerLinks from '@/components/shared/CrossLayerLinks';
 import { type TestSuite, type DefectMatch } from '@/lib/mock/testData';
 import type { AIGenerationResult } from '@/lib/ai/simulatedAI';
 import { Zap, ArrowRight, RefreshCw } from 'lucide-react';
@@ -265,8 +264,6 @@ export default function TestDetailTabs({
               techniques={['LLM']}
               title="AI Quality Assessment"
             />
-
-            <CrossLayerLinks serviceName={suite.service} currentLayer="L2-TEST" />
 
             <div className="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 rounded-xl border border-green-200 dark:border-green-800 p-6">
               <div className="flex items-center gap-2 mb-3">

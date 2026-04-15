@@ -269,10 +269,10 @@ export default function ModuleIntelligenceSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           🏗️ Application Module Intelligence
         </h2>
-        <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
           AI analysis of 89 modules based on defect patterns, service metrics, and release data
         </p>
       </motion.div>
@@ -285,7 +285,7 @@ export default function ModuleIntelligenceSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            className="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-xl dark:shadow-none dark:border border-gray-100 dark:border-white/[0.06] overflow-hidden"
           >
             {/* Module Header */}
             <div className={`bg-gradient-to-r ${module.color} p-6 text-white`}>
@@ -317,35 +317,35 @@ export default function ModuleIntelligenceSection() {
                 <div className="space-y-8">
                   {/* Common Issues */}
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Target className="w-5 h-5 text-blue-600 mr-2" />
                       Common Issues (Based on {module.defectCount} defects)
                     </h4>
                     
                     <div className="space-y-4">
                       {module.commonIssues.map((issue, issueIndex) => (
-                        <div key={issueIndex} className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500">
+                        <div key={issueIndex} className="bg-gray-50 dark:bg-white/[0.03] rounded-lg p-4 border-l-4 border-blue-500">
                           <div className="flex items-center justify-between mb-2">
-                            <h5 className="font-semibold text-gray-900">{issue.type}</h5>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            <h5 className="font-semibold text-gray-900 dark:text-white">{issue.type}</h5>
+                            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">
                               {issue.frequency} occurrences
                             </span>
                           </div>
                           
-                          <p className="text-gray-600 text-sm mb-3">{issue.description}</p>
-                          
+                          <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">{issue.description}</p>
+
                           <div className="space-y-2 text-sm">
                             <div>
-                              <span className="font-medium text-red-700">Root Cause:</span>
-                              <span className="text-gray-600 ml-2">{issue.rootCause}</span>
+                              <span className="font-medium text-red-700 dark:text-red-300">Root Cause:</span>
+                              <span className="text-gray-600 dark:text-gray-400 ml-2">{issue.rootCause}</span>
                             </div>
                             <div>
-                              <span className="font-medium text-green-700">Typical Fix:</span>
-                              <span className="text-gray-600 ml-2">{issue.typicalFix}</span>
+                              <span className="font-medium text-green-700 dark:text-green-300">Typical Fix:</span>
+                              <span className="text-gray-600 dark:text-gray-400 ml-2">{issue.typicalFix}</span>
                             </div>
                             <div>
-                              <span className="font-medium text-blue-700">Prevention:</span>
-                              <span className="text-gray-600 ml-2">{issue.preventionTips}</span>
+                              <span className="font-medium text-blue-700 dark:text-blue-300">Prevention:</span>
+                              <span className="text-gray-600 dark:text-gray-400 ml-2">{issue.preventionTips}</span>
                             </div>
                           </div>
                         </div>
@@ -355,20 +355,20 @@ export default function ModuleIntelligenceSection() {
 
                   {/* Performance Patterns */}
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <TrendingUp className="w-5 h-5 text-purple-600 mr-2" />
                       Service Performance Patterns
                     </h4>
-                    
+
                     <div className="space-y-3">
                       {module.performancePatterns.map((pattern, patternIndex) => (
-                        <div key={patternIndex} className="bg-purple-50 rounded-lg p-4">
-                          <div className="font-medium text-gray-900 mb-2">{pattern.pattern}</div>
-                          <div className="text-sm text-gray-600 mb-2">
-                            <span className="font-medium text-red-600">Impact:</span> {pattern.impact}
+                        <div key={patternIndex} className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+                          <div className="font-medium text-gray-900 dark:text-white mb-2">{pattern.pattern}</div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                            <span className="font-medium text-red-600 dark:text-red-300">Impact:</span> {pattern.impact}
                           </div>
-                          <div className="text-sm text-gray-600">
-                            <span className="font-medium text-green-600">Recommendation:</span> {pattern.recommendation}
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <span className="font-medium text-green-600 dark:text-green-300">Recommendation:</span> {pattern.recommendation}
                           </div>
                         </div>
                       ))}
@@ -380,20 +380,20 @@ export default function ModuleIntelligenceSection() {
                 <div className="space-y-8">
                   {/* Critical Dependencies */}
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Link className="w-5 h-5 text-orange-600 mr-2" />
                       Critical Dependencies
                     </h4>
-                    
+
                     <div className="space-y-3">
                       {module.dependencies.map((dep, depIndex) => (
-                        <div key={depIndex} className="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-400">
+                        <div key={depIndex} className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border-l-4 border-orange-400">
                           <div className="flex items-center justify-between mb-2">
-                            <h5 className="font-semibold text-gray-900">{dep.service}</h5>
+                            <h5 className="font-semibold text-gray-900 dark:text-white">{dep.service}</h5>
                             <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
-                              dep.criticality === 'high' 
-                                ? 'bg-red-100 text-red-800' 
-                                : 'bg-yellow-100 text-yellow-800'
+                              dep.criticality === 'high'
+                                ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                                : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
                             }`}>
                               {dep.criticality} criticality
                             </span>
@@ -401,12 +401,12 @@ export default function ModuleIntelligenceSection() {
                           
                           <div className="text-sm space-y-1">
                             <div>
-                              <span className="font-medium text-red-700">Impact:</span>
-                              <span className="text-gray-600 ml-2">{dep.impact}</span>
+                              <span className="font-medium text-red-700 dark:text-red-300">Impact:</span>
+                              <span className="text-gray-600 dark:text-gray-400 ml-2">{dep.impact}</span>
                             </div>
                             <div>
-                              <span className="font-medium text-green-700">Mitigation:</span>
-                              <span className="text-gray-600 ml-2">{dep.mitigation}</span>
+                              <span className="font-medium text-green-700 dark:text-green-300">Mitigation:</span>
+                              <span className="text-gray-600 dark:text-gray-400 ml-2">{dep.mitigation}</span>
                             </div>
                           </div>
                         </div>
@@ -416,43 +416,43 @@ export default function ModuleIntelligenceSection() {
 
                   {/* Code Health Insights */}
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <Code className="w-5 h-5 text-indigo-600 mr-2" />
                       Code Health Insights
                     </h4>
-                    
+
                     <div className="space-y-4">
-                      <div className="bg-indigo-50 rounded-lg p-4">
+                      <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-medium text-gray-900">Defect Density</span>
+                          <span className="font-medium text-gray-900 dark:text-white">Defect Density</span>
                           {getHealthStatusIcon(module.codeHealth.defectDensity.status)}
                         </div>
-                        <div className="text-lg font-semibold text-gray-900 mb-1">
+                        <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                           {module.codeHealth.defectDensity.value}
                         </div>
-                        <div className="text-sm text-gray-600 mb-2">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                           Industry benchmark: {module.codeHealth.defectDensity.benchmark}
                         </div>
                         {module.codeHealth.defectDensity.status !== 'excellent' && (
-                          <div className="text-sm text-blue-700 font-medium">
+                          <div className="text-sm text-blue-700 dark:text-blue-300 font-medium">
                             Focus on payment validation logic - 60% of defects
                           </div>
                         )}
                       </div>
 
-                      <div className="bg-indigo-50 rounded-lg p-4">
+                      <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-medium text-gray-900">Hotspot Files</span>
+                          <span className="font-medium text-gray-900 dark:text-white">Hotspot Files</span>
                           {getHealthStatusIcon(module.codeHealth.hotspotFiles.status)}
                         </div>
-                        <div className="text-lg font-semibold text-gray-900 mb-1">
+                        <div className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                           {module.codeHealth.hotspotFiles.value}
                         </div>
-                        <div className="text-sm text-gray-600 mb-2">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                           Should be: {module.codeHealth.hotspotFiles.benchmark}
                         </div>
                         {module.codeHealth.hotspotFiles.status === 'critical' && (
-                          <div className="text-sm text-red-700 font-medium">
+                          <div className="text-sm text-red-700 dark:text-red-300 font-medium">
                             Refactor PaymentProcessor into smaller components
                           </div>
                         )}
@@ -463,14 +463,14 @@ export default function ModuleIntelligenceSection() {
                   {/* Stability Factors (for low-risk modules) */}
                   {module.stabilityFactors && (
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                         <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
                         Stable Module Characteristics
                       </h4>
-                      
+
                       <div className="space-y-2">
                         {module.stabilityFactors.map((factor, factorIndex) => (
-                          <div key={factorIndex} className="flex items-start space-x-2 text-sm text-gray-600">
+                          <div key={factorIndex} className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400">
                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                             <span>{factor}</span>
                           </div>
@@ -482,30 +482,30 @@ export default function ModuleIntelligenceSection() {
               </div>
 
               {/* New Joiner Guidance */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h4 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <div className="mt-8 pt-8 border-t border-gray-200 dark:border-white/[0.06]">
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                   <Users className="w-5 h-5 text-green-600 mr-2" />
                   🎓 New Joiner Quick Start
                 </h4>
-                
+
                 <div className="grid md:grid-cols-3 gap-6">
                   {module.newJoinerGuidance.map((guidance, guidanceIndex) => (
-                    <div key={guidanceIndex} className="bg-green-50 rounded-lg p-4 border border-green-200">
+                    <div key={guidanceIndex} className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800/30">
                       <div className="flex items-center justify-between mb-3">
                         <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
-                          guidance.priority === 'High' 
-                            ? 'bg-red-100 text-red-800' 
+                          guidance.priority === 'High'
+                            ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                             : guidance.priority === 'Medium'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : 'bg-blue-100 text-blue-800'
+                            ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                            : 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
                         }`}>
                           {guidance.priority} Priority
                         </span>
-                        <span className="text-xs text-gray-500">{guidance.timeEstimate}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-500">{guidance.timeEstimate}</span>
                       </div>
-                      
-                      <h5 className="font-semibold text-gray-900 mb-2">{guidance.task}</h5>
-                      <p className="text-sm text-gray-600">{guidance.resources}</p>
+
+                      <h5 className="font-semibold text-gray-900 dark:text-white mb-2">{guidance.task}</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{guidance.resources}</p>
                     </div>
                   ))}
                 </div>

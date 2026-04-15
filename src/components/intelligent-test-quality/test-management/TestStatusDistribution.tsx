@@ -127,7 +127,7 @@ export default function TestStatusDistribution() {
       {/* Header with Controls */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Test Status Distribution</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Test Status Distribution</h2>
           <p className="text-gray-600">Comprehensive test status breakdown and analytics</p>
         </div>
         
@@ -156,8 +156,8 @@ export default function TestStatusDistribution() {
                 onClick={() => setViewMode(mode.id as any)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   viewMode === mode.id
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-white dark:bg-[#242424] text-blue-600 dark:text-blue-400 shadow-sm dark:shadow-none'
+                    : 'text-gray-600 hover:text-gray-900 dark:text-gray-100'
                 }`}
               >
                 <mode.icon className="w-4 h-4" />
@@ -179,7 +179,7 @@ export default function TestStatusDistribution() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-lg border border-gray-200 p-4"
+                className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4"
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -197,7 +197,7 @@ export default function TestStatusDistribution() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Status Distribution Pie Chart */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
               <h3 className="text-lg font-semibold mb-4">Status Distribution</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -221,7 +221,7 @@ export default function TestStatusDistribution() {
             </div>
 
             {/* Test Complexity Distribution */}
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
               <h3 className="text-lg font-semibold mb-4">Test Complexity</h3>
               <div className="space-y-4">
                 {testComplexity.map((complexity) => (
@@ -254,7 +254,7 @@ export default function TestStatusDistribution() {
       {viewMode === 'modules' && (
         <div className="space-y-6">
           {/* Module Performance Table */}
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
             <div className="p-6 border-b border-gray-200">
               <h3 className="text-lg font-semibold">Module Test Status</h3>
             </div>
@@ -273,13 +273,13 @@ export default function TestStatusDistribution() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trend</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-[#1A1A1A] divide-y divide-gray-200 dark:divide-gray-800">
                   {filteredModules.map((module) => (
                     <tr key={module.module} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">
                         {module.module}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                         {module.total}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
@@ -313,7 +313,7 @@ export default function TestStatusDistribution() {
           </div>
 
           {/* Module Status Chart */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
             <h3 className="text-lg font-semibold mb-4">Module Status Comparison</h3>
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
@@ -335,7 +335,7 @@ export default function TestStatusDistribution() {
 
       {/* Timeline Mode */}
       {viewMode === 'timeline' && (
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <h3 className="text-lg font-semibold mb-4">Test Status Timeline (Last 30 Days)</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -355,7 +355,7 @@ export default function TestStatusDistribution() {
       )}
 
       {/* Status Insights */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Status Analysis & Insights</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-green-50 rounded-lg p-4">

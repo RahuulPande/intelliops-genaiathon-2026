@@ -92,7 +92,7 @@ function CapabilityCard({
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
           >
-            <div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="px-6 pt-2 pb-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
               <DetailBlock label="How it works" content={capability.howItWorks} />
               <DetailBlock label="Prerequisites" content={capability.prerequisites} />
               <DetailBlock label="Real-world usage" content={capability.realWorldUsage} />
@@ -108,7 +108,7 @@ function CapabilityCard({
 function DetailBlock({ label, content }: { label: string; content: string }) {
   return (
     <div>
-      <p className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-2">
+      <p className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-3">
         {label}
       </p>
       <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{content}</p>
@@ -137,7 +137,7 @@ export default function FeatureAboutTab({
       {/* Overview */}
       <section>
         <SectionHeader title="Overview" icon={Layers} />
-        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed px-1">{overview}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed px-2">{overview}</p>
 
         {aiTechniques.length > 0 && (
           <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -154,7 +154,7 @@ export default function FeatureAboutTab({
         )}
 
         {aiTechniques.length > 0 && (
-          <div className="mt-3 flex flex-col gap-1.5 pl-1">
+          <div className="mt-3 flex flex-col gap-1.5 pl-2">
             {aiTechniques.map((tech) => (
               <p key={tech.name} className="text-xs text-gray-500 dark:text-gray-500">
                 <span className="font-medium text-gray-700 dark:text-gray-300">{tech.name}:</span>{' '}

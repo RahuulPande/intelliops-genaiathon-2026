@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, DM_Serif_Display, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { DemoThemeProvider } from "@/context/DemoThemeContext";
 import { LiveSimulationProvider } from "@/context/LiveSimulationContext";
 import { ToastProvider } from "@/context/ToastContext";
 
@@ -13,6 +14,26 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Marketing page fonts
+const dmSerif = DM_Serif_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono-jb",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -74,23 +95,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/images/intelliops-logo.svg" />
         <link rel="apple-touch-icon" href="/images/intelliops-logo.svg" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme'),d=localStorage.getItem('demo-theme'),r=localStorage.getItem('intelliops_role');var m=(r==='admin')?(t||'light'):(d||'dark');document.documentElement.className=m}catch(e){}})()`,
+          }}
+        />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} antialiased bg-white dark:bg-[#0F0F0F] text-gray-900 dark:text-gray-100`}
       >
         <AuthProvider>
-          <ToastProvider>
-            <LiveSimulationProvider>
-              {children}
-            </LiveSimulationProvider>
-          </ToastProvider>
+          <DemoThemeProvider>
+            <ToastProvider>
+              <LiveSimulationProvider>
+                {children}
+              </LiveSimulationProvider>
+            </ToastProvider>
+          </DemoThemeProvider>
         </AuthProvider>
       </body>
     </html>
   );
 }
-// Cache bust updated for GenAIathon 2026
+// Cache bust updated for v4.0.0

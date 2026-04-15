@@ -18,6 +18,7 @@ import {
   RefreshCw,
   ChevronRight,
 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 // ── Types ────────────────────────────────────────────
 
@@ -101,9 +102,14 @@ type SubTab = 'integrations' | 'webhooks' | 'ai-config';
 // ── Component ────────────────────────────────────────
 
 export default function IntegrationConfigPanel() {
+  const { isAdmin } = useAuth();
   const [activeTab, setActiveTab] = useState<SubTab>('integrations');
   const [showSecret, setShowSecret] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Demo mode: show only Delivery Intelligence integrations
+  const operateLayerIds = ['splunk', 'servicenow', 'dynatrace', 'pagerduty'];
+  const visibleIntegrations = isAdmin ? integrations : integrations.filter(i => !operateLayerIds.includes(i.id));
 
   const apiKey = 'intops_sk_live_••••••••••••4a2f';
   const apiKeyFull = 'intops_sk_live_a1b2c3d4e5f6g7h84a2f';
@@ -144,10 +150,10 @@ export default function IntegrationConfigPanel() {
             <code className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-sm font-mono text-gray-700 dark:text-gray-300">
               {showSecret ? apiKeyFull : apiKey}
             </code>
-            <button onClick={() => setShowSecret(!showSecret)} className="p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <button onClick={() => setShowSecret(!showSecret)} className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               {showSecret ? <EyeOff className="w-4 h-4 text-gray-400" /> : <Eye className="w-4 h-4 text-gray-400" />}
             </button>
-            <button onClick={handleCopy} className="p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <button onClick={handleCopy} className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               {copied ? <CheckCircle className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-gray-400" />}
             </button>
           </div>
@@ -157,7 +163,7 @@ export default function IntegrationConfigPanel() {
       {/* Sub-tab Navigation */}
       <div className="flex items-center gap-1 border-b border-gray-200 dark:border-gray-700">
         {subTabs.map(tab => (
-          <button key={tab.id} onClick={() => setActiveTab(tab.id as SubTab)} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${activeTab === tab.id ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+          <button key={tab.id} onClick={() => setActiveTab(tab.id as SubTab)} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${activeTab === tab.id ? 'bg-blue-500 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
             <tab.icon className="w-4 h-4" />{tab.label}
           </button>
         ))}
@@ -167,11 +173,11 @@ export default function IntegrationConfigPanel() {
       <AnimatePresence mode="wait">
         {activeTab === 'integrations' && (
           <motion.div key="integrations" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {integrations.map(int => {
+            {visibleIntegrations.map(int => {
               const st = statusConfig[int.status];
               const StatusIcon = st.icon;
               return (
-                <div key={int.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 hover:shadow-sm transition-all">
+                <div key={int.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 hover:shadow-sm dark:hover:shadow-none transition-all">
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">{int.icon}</span>
                     <div className="flex-1 min-w-0">
@@ -208,10 +214,10 @@ export default function IntegrationConfigPanel() {
         {activeTab === 'webhooks' && (
           <motion.div key="webhooks" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="space-y-4">
             {webhooks.map(wh => (
-              <div key={wh.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+              <div key={wh.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 hover:shadow-sm dark:hover:shadow-none transition-all">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <Webhook className={`w-4 h-4 ${wh.active ? 'text-green-500' : 'text-gray-400'}`} />
+                    <Webhook className={`w-4 h-4 ${wh.active ? 'text-green-500' : 'text-gray-400 dark:text-gray-500'}`} />
                     <div>
                       <span className="text-sm font-semibold text-gray-900 dark:text-white">{wh.name}</span>
                       {wh.lastTriggered && <span className="text-[10px] text-gray-400 ml-2">Last triggered: {wh.lastTriggered}</span>}
@@ -242,7 +248,7 @@ export default function IntegrationConfigPanel() {
         {activeTab === 'ai-config' && (
           <motion.div key="ai-config" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="space-y-4">
             {aiConfigs.map(ai => (
-              <div key={ai.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+              <div key={ai.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-sm dark:hover:shadow-none transition-all">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <Brain className="w-4 h-4 text-blue-500" />

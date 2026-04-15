@@ -178,7 +178,7 @@ export default function TestCaseManagement() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">Test Case Management</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Test Case Management</h2>
           <p className="text-gray-600">Organize, manage, and track your test cases</p>
         </div>
         
@@ -194,38 +194,38 @@ export default function TestCaseManagement() {
 
       {/* Statistics */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
-          <div className="text-2xl font-bold text-gray-900">{testCaseStats.total}</div>
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
+          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{testCaseStats.total}</div>
           <div className="text-sm text-gray-600">Total Cases</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-green-600">{testCaseStats.active}</div>
           <div className="text-sm text-gray-600">Active</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-yellow-600">{testCaseStats.draft}</div>
           <div className="text-sm text-gray-600">Draft</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-green-600">{testCaseStats.passed}</div>
           <div className="text-sm text-gray-600">Passed</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-red-600">{testCaseStats.failed}</div>
           <div className="text-sm text-gray-600">Failed</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-gray-600">{testCaseStats.blocked}</div>
           <div className="text-sm text-gray-600">Blocked</div>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
           <div className="text-2xl font-bold text-yellow-600">{testCaseStats.notRun}</div>
           <div className="text-sm text-gray-600">Not Run</div>
         </div>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="relative">
             <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -283,7 +283,7 @@ export default function TestCaseManagement() {
       </div>
 
       {/* Test Cases Table */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50">
@@ -298,12 +298,12 @@ export default function TestCaseManagement() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-[#1A1A1A] divide-y divide-gray-200 dark:divide-gray-800">
               {filteredTestCases.map((testCase) => (
                 <tr key={testCase.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
                     <div>
-                      <div className="font-medium text-gray-900">{testCase.id}: {testCase.title}</div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">{testCase.id}: {testCase.title}</div>
                       <div className="text-sm text-gray-500 max-w-xs truncate">{testCase.description}</div>
                       <div className="flex flex-wrap gap-1 mt-2">
                         {testCase.tags.map(tag => (
@@ -315,7 +315,7 @@ export default function TestCaseManagement() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                     {testCase.module}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -331,19 +331,19 @@ export default function TestCaseManagement() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
                       {getExecutionStatusIcon(testCase.executionStatus)}
-                      <span className="text-sm text-gray-900 capitalize">{testCase.executionStatus.replace('-', ' ')}</span>
+                      <span className="text-sm text-gray-900 dark:text-gray-100 capitalize">{testCase.executionStatus.replace('-', ' ')}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
                       <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-900">{testCase.assignee}</span>
+                      <span className="text-sm text-gray-900 dark:text-gray-100">{testCase.assignee}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-900">{testCase.lastRun}</span>
+                      <span className="text-sm text-gray-900 dark:text-gray-100">{testCase.lastRun}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -395,7 +395,7 @@ export default function TestCaseManagement() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center space-x-2 bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all"
+            className="flex items-center justify-center space-x-2 bg-white dark:bg-[#1A1A1A] rounded-lg p-4 shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all"
           >
             <Play className="w-5 h-5 text-green-600" />
             <span>Run All Active Tests</span>
@@ -404,7 +404,7 @@ export default function TestCaseManagement() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center space-x-2 bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all"
+            className="flex items-center justify-center space-x-2 bg-white dark:bg-[#1A1A1A] rounded-lg p-4 shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all"
           >
             <FileText className="w-5 h-5 text-blue-600" />
             <span>Export Test Cases</span>
@@ -413,7 +413,7 @@ export default function TestCaseManagement() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center justify-center space-x-2 bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all"
+            className="flex items-center justify-center space-x-2 bg-white dark:bg-[#1A1A1A] rounded-lg p-4 shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all"
           >
             <Plus className="w-5 h-5 text-purple-600" />
             <span>Bulk Import</span>

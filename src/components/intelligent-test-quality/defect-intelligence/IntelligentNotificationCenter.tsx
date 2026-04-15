@@ -192,9 +192,9 @@ export default function IntelligentNotificationCenter() {
       {/* Notification Bell */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors"
       >
-        <Bell className="w-6 h-6 text-gray-600" />
+        <Bell className="w-6 h-6 text-gray-600 dark:text-gray-400" />
         {unreadCount > 0 && (
           <motion.div
             initial={{ scale: 0 }}
@@ -221,15 +221,15 @@ export default function IntelligentNotificationCenter() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-12 w-96 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
+            className="absolute right-0 top-12 w-96 bg-white dark:bg-[#1A1A1A] rounded-lg shadow-xl dark:shadow-none border border-gray-200 dark:border-gray-800 z-50"
           >
             {/* Header */}
-            <div className="p-4 border-b border-gray-200">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold text-gray-900">Intelligent Notifications</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Intelligent Notifications</h3>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded hover:bg-gray-100 transition-colors"
+                  className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#242424] transition-colors"
                 >
                   <X className="w-4 h-4 text-gray-500" />
                 </button>
@@ -247,8 +247,8 @@ export default function IntelligentNotificationCenter() {
                     onClick={() => setFilter(tab.id as any)}
                     className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
                       filter === tab.id
-                        ? 'bg-purple-100 text-purple-700'
-                        : 'text-gray-600 hover:bg-gray-100'
+                        ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#242424]'
                     }`}
                   >
                     {tab.label} {tab.count > 0 && `(${tab.count})`}
@@ -265,7 +265,7 @@ export default function IntelligentNotificationCenter() {
                   <p>No notifications to display</p>
                 </div>
               ) : (
-                <div className="divide-y divide-gray-200">
+                <div className="divide-y divide-gray-200 dark:divide-gray-800">
                   {filteredNotifications.map((notification) => {
                     const TypeIcon = getTypeIcon(notification.type);
                     
@@ -288,7 +288,7 @@ export default function IntelligentNotificationCenter() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between">
                               <h4 className={`text-sm font-medium ${
-                                !notification.isRead ? 'text-gray-900' : 'text-gray-700'
+                                !notification.isRead ? 'text-gray-900 dark:text-gray-100' : 'text-gray-700 dark:text-gray-300'
                               }`}>
                                 {notification.title}
                               </h4>
@@ -300,7 +300,7 @@ export default function IntelligentNotificationCenter() {
                               </button>
                             </div>
                             
-                            <p className="text-xs text-gray-600 mt-1 line-clamp-3">
+                            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-3">
                               {notification.message}
                             </p>
                             
@@ -316,7 +316,7 @@ export default function IntelligentNotificationCenter() {
                                 </div>
                               )}
                               {notification.defectId && (
-                                <span className="font-mono bg-gray-100 px-1 rounded">
+                                <span className="font-mono bg-gray-100 dark:bg-[#242424] px-1 rounded">
                                   {notification.defectId}
                                 </span>
                               )}
@@ -336,7 +336,7 @@ export default function IntelligentNotificationCenter() {
                                       ? 'bg-purple-600 text-white hover:bg-purple-700'
                                       : action.type === 'danger'
                                       ? 'bg-red-600 text-white hover:bg-red-700'
-                                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                      : 'bg-gray-200 dark:bg-[#2A2A2A] text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-[#333333]'
                                   }`}
                                 >
                                   {action.label}
@@ -345,7 +345,7 @@ export default function IntelligentNotificationCenter() {
                               {!notification.isRead && (
                                 <button
                                   onClick={() => markAsRead(notification.id)}
-                                  className="px-2 py-1 text-xs text-gray-600 hover:text-gray-800 transition-colors"
+                                  className="px-2 py-1 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
                                 >
                                   Mark as read
                                 </button>
@@ -361,8 +361,8 @@ export default function IntelligentNotificationCenter() {
             </div>
 
             {/* Footer */}
-            <div className="p-3 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-              <div className="flex items-center justify-between text-xs text-gray-600">
+            <div className="p-3 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#141414] rounded-b-lg">
+              <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
                 <span>{filteredNotifications.length} notifications</span>
                 <button className="flex items-center space-x-1 hover:text-gray-800 transition-colors">
                   <Settings className="w-3 h-3" />

@@ -6,7 +6,7 @@ import { useMobileResponsive, useSwipeGestures } from '@/lib/hooks/useMobileResp
 import {
   Home, Activity, Brain, Package, Settings, Book, BookOpen, Menu, X,
   ChevronLeft, ChevronRight, ChevronDown, Layers, Lock, LogOut,
-  FileSearch, Code, GraduationCap, TestTube
+  FileSearch, Code, GraduationCap, TestTube, BarChart3, Zap, Sparkles
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -108,9 +108,7 @@ const navigationGroups: NavigationGroup[] = [
     integrations: ['Jenkins', 'GitHub', 'ML', 'LLM'],
     sections: [
       { id: 'release-intelligence', name: 'Release Intelligence', icon: Package,
-        path: '/release/risk', description: 'Deployment risk assessment' },
-      { id: 'knowledge-base', name: 'Application Knowledge Base', icon: BookOpen,
-        path: '/release/knowledge-base', description: 'Institutional knowledge from defects & releases' }
+        path: '/release/risk', description: 'Deployment risk assessment' }
     ]
   },
   {
@@ -142,7 +140,9 @@ const navigationGroups: NavigationGroup[] = [
     integrations: ['RAG', 'LLM', 'ML', 'Feedback Loop'],
     sections: [
       { id: 'learn-intelligence', name: 'Learning Intelligence', icon: GraduationCap,
-        path: '/learn/intelligence', description: 'Self-learning feedback loop & continuous improvement' }
+        path: '/learn/intelligence', description: 'Self-learning feedback loop & continuous improvement' },
+      { id: 'knowledge-base', name: 'Application Knowledge Base', icon: BookOpen,
+        path: '/learn/knowledge-base', description: 'Institutional knowledge from defects & releases' }
     ]
   }
 ];
@@ -184,7 +184,7 @@ const demoNavigationGroups: NavigationGroup[] = [
     badgeText: 'text-purple-700 dark:text-purple-300',
     accentColor: 'bg-purple-600',
     icon: Brain,
-    integrations: ['JIRA', 'TestRail', 'Jenkins', 'RAG', 'NLP', 'ML', 'LLM'],
+    integrations: ['JIRA', 'TestRail', 'RAG', 'NLP', 'ML', 'LLM'],
     sections: [
       { id: 'demo-defect-intelligence', name: 'Defect Intelligence', icon: Brain,
         path: '/test/defects', description: 'AI defect matching & analytics' },
@@ -193,7 +193,7 @@ const demoNavigationGroups: NavigationGroup[] = [
       { id: 'release-intelligence', name: 'Release Intelligence', icon: Package,
         path: '/release/risk', description: 'Release risk & deployment' },
       { id: 'knowledge-base', name: 'Knowledge Base', icon: BookOpen,
-        path: '/release/knowledge-base', description: 'Institutional knowledge' }
+        path: '/release/knowledge-base', description: 'Institutional knowledge' },
     ]
   }
 ];
@@ -237,7 +237,7 @@ export default function Sidebar({
   const mobileState = useMobileResponsive();
   const { isAdmin, logout } = useAuth();
 
-  // Role-based layer access: admin unlocks all layers; demo gets TEST (L2) + RELEASE (L3)
+  // Role-based layer access: admin unlocks all layers; demo gets Delivery Intelligence group
   const isLayerAccessible = (groupId: string): boolean => {
     if (isAdmin) return true;
     return groupId === 'test-intelligence' || groupId === 'release-intelligence' || groupId === 'delivery-intelligence';
@@ -278,11 +278,36 @@ export default function Sidebar({
   const isGroupActive = (group: NavigationGroup) =>
     group.sections.some(s => s.id === currentSection);
 
-  // ── Render a single nav item ──
+  // ── Render a single nav item (admin / light mode) ──
   const renderNavItem = (section: NavigationSection, accentColor?: string, locked?: boolean) => {
     const isActive = currentSection === section.id;
     const IconComponent = section.icon;
     const accent = accentColor || 'bg-blue-600';
+
+    // Demo mode: use dark sidebar styling, no subtitles, never locked
+    if (!isAdmin) {
+      return (
+        <motion.button
+          key={section.id}
+          data-section={section.id}
+          onClick={() => handleSectionClick(section.id)}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
+          className={`w-full text-left px-3 py-1.5 rounded-lg transition-all duration-200 group relative ${
+            isActive
+              ? 'bg-white/10 text-white border-l-[3px] border-l-[#E8553A]'
+              : 'text-white/65 hover:text-white/85 hover:bg-white/5'
+          }`}
+        >
+          <div className="flex items-center space-x-2.5">
+            <IconComponent className={`w-[15px] h-[15px] flex-shrink-0 ${isActive ? 'text-[#E8553A]' : 'text-white/40'}`} />
+            {!isCollapsed && (
+              <span className="text-[13px] font-medium leading-tight">{section.name}</span>
+            )}
+          </div>
+        </motion.button>
+      );
+    }
 
     return (
       <motion.button
@@ -341,8 +366,33 @@ export default function Sidebar({
   const renderGroupHeader = (group: NavigationGroup) => {
     const isExpanded = !collapsedGroups.has(group.id);
     const hasActiveChild = isGroupActive(group);
-    const locked = !isLayerAccessible(group.id);
+    const locked = isAdmin ? !isLayerAccessible(group.id) : false;
 
+    // Demo mode: dark sidebar, no L badge, no integration tags, no lock icons
+    if (!isAdmin) {
+      return (
+        <div key={group.id} className="mt-2 first:mt-0">
+          {!isCollapsed ? (
+            <>
+              <div className="px-3 py-1.5">
+                <span className="text-[10px] font-semibold text-white/30 uppercase tracking-wider">
+                  {group.label}
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                {group.sections.map(section => renderNavItem(section, group.accentColor, false))}
+              </div>
+            </>
+          ) : (
+            <div className="space-y-0.5">
+              {group.sections.map(section => renderNavItem(section, group.accentColor, false))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Admin mode: full group header with L badge, integration tags, collapsible
     return (
       <div key={group.id} className="mt-3 first:mt-0">
         {!isCollapsed ? (
@@ -371,7 +421,7 @@ export default function Sidebar({
               }`} />
             </button>
 
-            {/* Integration tags */}
+            {/* Integration tags — admin only */}
             {isExpanded && (
               <div className="flex flex-wrap gap-1 px-3 mt-1 mb-1.5">
                 {group.integrations.map(tool => (
@@ -444,12 +494,20 @@ export default function Sidebar({
           width: isCollapsed ? '4rem' : '17rem',
           x: isMobileOpen ? 0 : (isCollapsed ? 0 : 0)
         }}
-        className={`fixed left-0 top-0 h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 shadow-lg z-40 transition-all duration-300 flex flex-col ${
+        className={`fixed left-0 top-0 h-full shadow-lg z-40 transition-all duration-300 flex flex-col ${
+          isAdmin
+            ? 'bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800'
+            : 'bg-[#1A1A1A] border-r border-white/[0.06]'
+        } ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         } ${mobileState.isMobile ? 'touch-pan-x' : ''}`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+        <div className={`flex-shrink-0 ${
+          isAdmin
+            ? 'p-4 border-b border-gray-200 dark:border-gray-800'
+            : 'px-4 py-3 border-b border-white/[0.06]'
+        }`}>
           <div className="flex items-center justify-between">
             {!isCollapsed && (
               <motion.div
@@ -458,12 +516,12 @@ export default function Sidebar({
                 exit={{ opacity: 0 }}
                 className="flex items-center space-x-2"
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Layers className="w-5 h-5 text-white" />
+                <div className={`${isAdmin ? 'w-8 h-8' : 'w-7 h-7'} bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center`}>
+                  <Layers className={`${isAdmin ? 'w-5 h-5' : 'w-4 h-4'} text-white`} />
                 </div>
                 <div>
-                  <h1 className="text-base font-bold text-gray-900 dark:text-white">IntelliOps AI</h1>
-                  <p className="text-[10px] text-gray-500 dark:text-gray-500">Software Lifecycle Intelligence</p>
+                  <h1 className={`${isAdmin ? 'text-base' : 'text-sm'} font-bold ${isAdmin ? 'text-gray-900 dark:text-white' : 'text-white'}`}>IntelliOps AI</h1>
+                  <p className={`text-[10px] ${isAdmin ? 'text-gray-500 dark:text-gray-500' : 'text-white/50'}`}>Software Lifecycle Intelligence</p>
                 </div>
               </motion.div>
             )}
@@ -472,11 +530,15 @@ export default function Sidebar({
             <div className="hidden md:block">
               <button
                 onClick={onToggleCollapse}
-                className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className={`p-1.5 rounded-lg transition-colors ${
+                  isAdmin
+                    ? 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'hover:bg-white/10'
+                }`}
               >
                 {isCollapsed ?
-                  <ChevronRight className="w-4 h-4 text-gray-500" /> :
-                  <ChevronLeft className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className={`w-4 h-4 ${isAdmin ? 'text-gray-500' : 'text-white/40'}`} /> :
+                  <ChevronLeft className={`w-4 h-4 ${isAdmin ? 'text-gray-500' : 'text-white/40'}`} />
                 }
               </button>
             </div>
@@ -484,14 +546,14 @@ export default function Sidebar({
         </div>
 
         {/* Navigation */}
-        <nav className="p-2 flex-1 overflow-y-auto scrollbar-thin">
+        <nav className={`flex-1 overflow-y-auto scrollbar-thin ${isAdmin ? 'p-2' : 'px-2 py-1.5'}`}>
           {/* Top-level sections */}
           <div className="space-y-0.5">
             {topLevelSections.map(section => renderNavItem(section))}
           </div>
 
           {/* Divider */}
-          <div className="my-3 mx-2 border-t border-gray-200 dark:border-gray-800" />
+          <div className={`mx-2 border-t ${isAdmin ? 'my-3 border-gray-200 dark:border-gray-800' : 'my-2 border-white/[0.06]'}`} />
 
           {/* Layer groups */}
           <div className="space-y-1">
@@ -499,7 +561,7 @@ export default function Sidebar({
           </div>
 
           {/* Divider */}
-          <div className="my-3 mx-2 border-t border-gray-200 dark:border-gray-800" />
+          <div className={`mx-2 border-t ${isAdmin ? 'my-3 border-gray-200 dark:border-gray-800' : 'my-2 border-white/[0.06]'}`} />
 
           {/* Bottom sections */}
           <div className="space-y-0.5">
@@ -508,42 +570,39 @@ export default function Sidebar({
         </nav>
 
         {/* Footer */}
-        <div className="p-3 border-t border-gray-200 dark:border-gray-800 flex-shrink-0">
-          {/* Logout Button */}
+        <div className={`flex-shrink-0 ${
+          isAdmin
+            ? 'p-3 border-t border-gray-200 dark:border-gray-800'
+            : 'px-3 py-2 border-t border-white/[0.06]'
+        }`}>
           {/* Mode Badge */}
           {!isCollapsed && (
-            <div className={`flex items-center justify-center gap-1.5 px-2 py-1 rounded-md mb-2 text-[10px] font-semibold tracking-wide ${
+            <div className={`flex items-center justify-center gap-1.5 px-2 py-1 rounded-md mb-1.5 text-[10px] font-semibold tracking-wide ${
               isAdmin
                 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700/50'
-                : 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/50'
+                : 'text-blue-400 bg-blue-400/10 border border-blue-400/20'
             }`}>
               {isAdmin ? 'Development Mode' : 'Demo Mode'}
             </div>
           )}
           <button
             onClick={logout}
-            className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 dark:hover:text-red-400 transition-colors mb-2 ${
-              isCollapsed ? 'justify-center' : ''
-            }`}
+            className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors mb-1 ${
+              isAdmin
+                ? 'text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 dark:hover:text-red-400'
+                : 'text-white/40 hover:text-white/70 hover:bg-white/5'
+            } ${isCollapsed ? 'justify-center' : ''}`}
             title="Logout"
           >
-            <LogOut className="w-4 h-4 flex-shrink-0" />
+            <LogOut className="w-3.5 h-3.5 flex-shrink-0" />
             {!isCollapsed && <span className="text-xs font-medium">Logout</span>}
           </button>
           {!isCollapsed && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center"
-            >
-              <div className="text-[10px] text-gray-400 dark:text-gray-600">
+            <div className="text-center">
+              <div className={`text-[9px] ${isAdmin ? 'text-gray-400 dark:text-gray-600' : 'text-white/20'}`}>
                 IntelliOps AI v4.0.0
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-600">
-                Software Lifecycle Intelligence
-              </div>
-            </motion.div>
+            </div>
           )}
         </div>
       </motion.aside>

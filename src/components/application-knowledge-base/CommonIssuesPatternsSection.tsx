@@ -285,30 +285,30 @@ export default function CommonIssuesPatternsSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           🔍 Issue Patterns & Solutions
         </h2>
-        <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
+        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto mb-8">
           AI-identified patterns from {overallStats.totalDefectsAnalyzed} defects across all modules with proven solutions
         </p>
 
         {/* Overall Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-gradient-to-r from-gray-50 dark:from-gray-900/30 to-blue-50 dark:to-blue-900/20 rounded-2xl p-6">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-1">{overallStats.totalDefectsAnalyzed}</div>
-            <div className="text-sm text-gray-600">Defects Analyzed</div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">{overallStats.totalDefectsAnalyzed}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Defects Analyzed</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-600 mb-1">{overallStats.patternAccuracy}%</div>
-            <div className="text-sm text-gray-600">Pattern Accuracy</div>
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">{overallStats.patternAccuracy}%</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Pattern Accuracy</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-1">{overallStats.avgResolutionTime}</div>
-            <div className="text-sm text-gray-600">Avg Resolution Time</div>
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">{overallStats.avgResolutionTime}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Avg Resolution Time</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-600 mb-1">67%</div>
-            <div className="text-sm text-gray-600">Issue Prevention</div>
+            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1">67%</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Issue Prevention</div>
           </div>
         </div>
       </motion.div>
@@ -321,7 +321,7 @@ export default function CommonIssuesPatternsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            className="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-xl dark:shadow-none dark:border border-gray-100 dark:border-white/[0.06] overflow-hidden"
           >
             {/* Category Header */}
             <div className={`bg-gradient-to-r ${category.color} p-6 text-white`}>
@@ -342,26 +342,26 @@ export default function CommonIssuesPatternsSection() {
             <div className="p-8">
               <div className="space-y-8">
                 {category.patterns.map((pattern, patternIndex) => (
-                  <div key={patternIndex} className={`${category.bgColor} rounded-lg p-6 border ${category.borderColor}`}>
+                  <div key={patternIndex} className={`${category.bgColor} dark:${category.bgColor.replace('bg-', 'bg-').replace('-50', '-900/20')} rounded-lg p-6 border ${category.borderColor} dark:${category.borderColor.replace('border-', 'border-').replace('-200', '-800/30')}`}>
                     {/* Pattern Header */}
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-xl font-bold text-gray-900">{pattern.name}</h4>
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">{pattern.name}</h4>
                       <div className="flex items-center space-x-2">
-                        <span className="bg-white text-gray-800 text-xs font-medium px-3 py-1 rounded-full">
+                        <span className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-medium px-3 py-1 rounded-full">
                           {pattern.confidence}% confidence
                         </span>
                         <Award className="w-5 h-5 text-yellow-500" />
                       </div>
                     </div>
 
-                    <p className="text-gray-700 mb-6">{pattern.description}</p>
+                    <p className="text-gray-700 dark:text-gray-300 mb-6">{pattern.description}</p>
 
                     <div className="grid lg:grid-cols-2 gap-8">
                       {/* Left Side - Indicators and Causes */}
                       <div className="space-y-6">
                         {/* Pattern Indicators */}
                         <div>
-                          <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                          <h5 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                             <Search className="w-4 h-4 text-blue-600 mr-2" />
                             Pattern Indicators
                           </h5>
@@ -369,7 +369,7 @@ export default function CommonIssuesPatternsSection() {
                             {pattern.indicators.map((indicator, indicatorIndex) => (
                               <li key={indicatorIndex} className="flex items-start space-x-2 text-sm">
                                 <AlertTriangle className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-600">{indicator}</span>
+                                <span className="text-gray-600 dark:text-gray-400">{indicator}</span>
                               </li>
                             ))}
                           </ul>
@@ -377,15 +377,15 @@ export default function CommonIssuesPatternsSection() {
 
                         {/* Common Causes */}
                         <div>
-                          <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                          <h5 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                             <Bug className="w-4 h-4 text-red-600 mr-2" />
                             Common Causes
                           </h5>
                           <div className="space-y-2">
                             {pattern.commonCauses.map((cause, causeIndex) => (
-                              <div key={causeIndex} className="flex items-center justify-between bg-white rounded-lg p-3">
-                                <span className="text-sm text-gray-700">{cause.cause}</span>
-                                <span className="text-xs font-medium bg-red-100 text-red-800 px-2 py-1 rounded-full">
+                              <div key={causeIndex} className="flex items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-3">
+                                <span className="text-sm text-gray-700 dark:text-gray-300">{cause.cause}</span>
+                                <span className="text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 px-2 py-1 rounded-full">
                                   {cause.frequency}%
                                 </span>
                               </div>
@@ -398,27 +398,27 @@ export default function CommonIssuesPatternsSection() {
                       <div className="space-y-6">
                         {/* Proven Solutions */}
                         <div>
-                          <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                          <h5 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                             <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
                             Proven Solutions
                           </h5>
-                          
+
                           {pattern.solutions.map((solution, solutionIndex) => (
-                            <div key={solutionIndex} className="bg-white rounded-lg p-4 border border-green-200">
+                            <div key={solutionIndex} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-green-200 dark:border-green-800/30">
                               <div className="flex items-center justify-between mb-3">
-                                <h6 className="font-semibold text-gray-900">{solution.title}</h6>
-                                <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
+                                <h6 className="font-semibold text-gray-900 dark:text-white">{solution.title}</h6>
+                                <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs font-medium px-2 py-1 rounded-full">
                                   {solution.successRate}% success rate
                                 </span>
                               </div>
                               
                               <div className="space-y-3">
                                 <div>
-                                  <span className="text-sm font-medium text-gray-900">Implementation Steps:</span>
+                                  <span className="text-sm font-medium text-gray-900 dark:text-white">Implementation Steps:</span>
                                   <ol className="mt-2 space-y-1">
                                     {solution.steps.map((step, stepIndex) => (
-                                      <li key={stepIndex} className="text-sm text-gray-600 flex items-start space-x-2">
-                                        <span className="text-green-600 font-bold">{stepIndex + 1}.</span>
+                                      <li key={stepIndex} className="text-sm text-gray-600 dark:text-gray-400 flex items-start space-x-2">
+                                        <span className="text-green-600 dark:text-green-400 font-bold">{stepIndex + 1}.</span>
                                         <span>{step}</span>
                                       </li>
                                     ))}
@@ -427,12 +427,12 @@ export default function CommonIssuesPatternsSection() {
                                 
                                 <div className="grid grid-cols-2 gap-4 text-sm">
                                   <div>
-                                    <span className="font-medium text-gray-900">Time to Fix:</span>
-                                    <div className="text-blue-600">{solution.timeToFix}</div>
+                                    <span className="font-medium text-gray-900 dark:text-white">Time to Fix:</span>
+                                    <div className="text-blue-600 dark:text-blue-400">{solution.timeToFix}</div>
                                   </div>
                                   <div>
-                                    <span className="font-medium text-gray-900">Prevention Cost:</span>
-                                    <div className="text-purple-600">{solution.preventionCost}</div>
+                                    <span className="font-medium text-gray-900 dark:text-white">Prevention Cost:</span>
+                                    <div className="text-purple-600 dark:text-purple-400">{solution.preventionCost}</div>
                                   </div>
                                 </div>
                               </div>
@@ -442,14 +442,14 @@ export default function CommonIssuesPatternsSection() {
 
                         {/* Related Defects */}
                         <div>
-                          <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                          <h5 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                             <FileText className="w-4 h-4 text-purple-600 mr-2" />
                             Related Defects
                           </h5>
                           <div className="space-y-2">
                             {pattern.relatedDefects.map((defect, defectIndex) => (
-                              <div key={defectIndex} className="bg-white rounded-lg p-3 border border-purple-200">
-                                <span className="text-sm text-purple-700 font-medium">{defect}</span>
+                              <div key={defectIndex} className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-purple-200 dark:border-purple-800/30">
+                                <span className="text-sm text-purple-700 dark:text-purple-300 font-medium">{defect}</span>
                               </div>
                             ))}
                           </div>
@@ -469,29 +469,29 @@ export default function CommonIssuesPatternsSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.0 }}
-        className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center"
+        className="mt-16 bg-gradient-to-r from-blue-600 dark:from-blue-900/30 to-purple-600 dark:to-purple-900/30 rounded-2xl p-8 text-white dark:text-white text-center border border-transparent dark:border-blue-800/30"
       >
         <h3 className="text-3xl font-bold mb-6">Pattern Analysis Impact</h3>
-        
+
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <div className="text-4xl font-bold text-yellow-300 mb-2">91%</div>
-            <div className="text-blue-100">Pattern Recognition Accuracy</div>
-            <div className="text-sm text-blue-200 mt-1">Based on historical validation</div>
+            <div className="text-4xl font-bold text-yellow-300 dark:text-yellow-400 mb-2">91%</div>
+            <div className="text-blue-100 dark:text-blue-200">Pattern Recognition Accuracy</div>
+            <div className="text-sm text-blue-200 dark:text-blue-300 mt-1">Based on historical validation</div>
           </div>
           <div>
-            <div className="text-4xl font-bold text-yellow-300 mb-2">67%</div>
-            <div className="text-blue-100">Reduction in Repeated Issues</div>
-            <div className="text-sm text-blue-200 mt-1">Teams using pattern guidance</div>
+            <div className="text-4xl font-bold text-yellow-300 dark:text-yellow-400 mb-2">67%</div>
+            <div className="text-blue-100 dark:text-blue-200">Reduction in Repeated Issues</div>
+            <div className="text-sm text-blue-200 dark:text-blue-300 mt-1">Teams using pattern guidance</div>
           </div>
           <div>
-            <div className="text-4xl font-bold text-yellow-300 mb-2">4.2h</div>
-            <div className="text-blue-100">Average Resolution Time</div>
-            <div className="text-sm text-blue-200 mt-1">With pattern-based solutions</div>
+            <div className="text-4xl font-bold text-yellow-300 dark:text-yellow-400 mb-2">4.2h</div>
+            <div className="text-blue-100 dark:text-blue-200">Average Resolution Time</div>
+            <div className="text-sm text-blue-200 dark:text-blue-300 mt-1">With pattern-based solutions</div>
           </div>
         </div>
-        
-        <p className="text-blue-100 max-w-4xl mx-auto text-lg">
+
+        <p className="text-blue-100 dark:text-blue-200 max-w-4xl mx-auto text-lg">
           Pattern recognition transforms reactive debugging into proactive problem prevention. 
           Teams equipped with this knowledge base solve issues 60% faster and avoid 67% of 
           recurring problems that typically plague new team members.

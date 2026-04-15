@@ -1,44 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
+import { useDemoTheme } from '@/context/DemoThemeContext';
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    // Check system preference and saved preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-    setIsDark(shouldBeDark);
-    
-    // Apply theme to document
-    if (shouldBeDark) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    
-    if (newTheme) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    }
-  };
+  const { isDark, toggleTheme } = useDemoTheme();
 
   return (
     <motion.button
@@ -46,15 +13,15 @@ export default function ThemeToggle() {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={`relative p-2 rounded-lg transition-colors ${
-        isDark 
-          ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' 
+        isDark
+          ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700'
           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
       }`}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <motion.div
         initial={false}
-        animate={{ 
+        animate={{
           rotate: isDark ? 180 : 0,
           scale: isDark ? 0.8 : 1
         }}
@@ -68,4 +35,4 @@ export default function ThemeToggle() {
       </motion.div>
     </motion.button>
   );
-} 
+}

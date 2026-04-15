@@ -31,7 +31,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
 
   const qualityMetrics = [
     { icon: Target, label: 'Defect Match Accuracy', value: '96%', color: 'text-green-600' },
-    { icon: Clock, label: 'Resolution Time Saved', value: '2,340h', color: 'text-blue-600' },
+    { icon: Clock, label: 'Resolution Time Saved', value: '680h', color: 'text-blue-600' },
     { icon: TestTube, label: 'Tests Executed', value: '1,247', color: 'text-purple-600' },
     { icon: TrendingUp, label: 'Quality Score', value: '94.2', color: 'text-emerald-600' }
   ];
@@ -46,8 +46,8 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-600',
       metrics: [
-        { label: 'Matches Found', value: '12,847', change: '+23%' },
-        { label: 'Time Saved', value: '2,340h', change: '+18%' },
+        { label: 'Matches Found', value: '3,247', change: '+23%' },
+        { label: 'Time Saved', value: '680h', change: '+18%' },
         { label: 'Success Rate', value: '96%', change: '+2%' }
       ],
       quickActions: [
@@ -144,7 +144,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
           <h1 className="text-4xl font-bold">Intelligent Test & Quality Management</h1>
         </div>
         
-        <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
           Transform your quality management with AI-driven defect resolution, predictive testing insights, 
           and comprehensive quality analytics. From intelligent defect matching to performance optimization, 
           ensure exceptional software quality while reducing time-to-resolution by 75%.
@@ -158,13 +158,13 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-lg p-4 shadow-sm border border-gray-200"
+              className="bg-white dark:bg-[#1A1A1A] rounded-lg p-4 shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800"
             >
               <div className="flex items-center justify-center space-x-2">
                 <metric.icon className={`w-5 h-5 ${metric.color}`} />
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                  <div className="text-sm text-gray-600">{metric.label}</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{metric.value}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{metric.label}</div>
                 </div>
               </div>
             </motion.div>
@@ -179,8 +179,8 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
         transition={{ duration: 0.6, delay: 0.2 }}
         className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6"
       >
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">AI-Powered Quality Assurance Platform</h2>
-        <p className="text-gray-700 text-lg leading-relaxed">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">AI-Powered Quality Assurance Platform</h2>
+        <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
           Our comprehensive platform combines intelligent defect resolution, advanced test management, 
           predictive quality analytics, and performance intelligence to deliver exceptional software quality. 
           Move beyond traditional testing to a predictive, AI-driven approach that prevents issues before they impact users.
@@ -202,7 +202,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
             transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
             onMouseEnter={() => setHoveredCard(section.id)}
             onMouseLeave={() => setHoveredCard(null)}
-            className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            className="bg-white dark:bg-[#1A1A1A] rounded-xl shadow-lg dark:shadow-none border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
             {/* Card Header */}
             <div className={`bg-gradient-to-r ${section.gradient} p-6 text-white`}>
@@ -219,12 +219,12 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
 
             {/* Metrics Preview */}
             <div className="p-6 space-y-4">
-              <h4 className="font-semibold text-gray-900 mb-3">Key Metrics</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Key Metrics</h4>
               <div className="grid grid-cols-3 gap-3">
                 {section.metrics.map((metric) => (
                   <div key={metric.label} className="text-center">
-                    <div className="text-lg font-bold text-gray-900">{metric.value}</div>
-                    <div className="text-xs text-gray-600">{metric.label}</div>
+                    <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{metric.value}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">{metric.label}</div>
                     {metric.change && (
                       <div className={`text-xs ${
                         metric.change.startsWith('+') ? 'text-green-600' : 
@@ -239,35 +239,35 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
 
               {/* Features */}
               <div className="mt-4">
-                <h5 className="text-sm font-medium text-gray-700 mb-2">Key Features</h5>
+                <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Key Features</h5>
                 <div className="grid grid-cols-2 gap-1">
                   {section.features.map((feature) => (
                     <div key={feature} className="flex items-center space-x-2">
                       <CheckCircle className="w-3 h-3 text-green-500" />
-                      <span className="text-xs text-gray-600">{feature}</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Business Value */}
-              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                <p className="text-sm text-blue-800 font-medium">{section.businessValue}</p>
+              <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                <p className="text-sm text-blue-800 dark:text-blue-400 font-medium">{section.businessValue}</p>
               </div>
 
               {/* Quick Actions */}
               <div className="space-y-2 mt-4">
-                <h5 className="text-sm font-medium text-gray-700">Quick Actions</h5>
+                <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300">Quick Actions</h5>
                 {section.quickActions.map((action) => (
                   <motion.button
                     key={action.action}
                     onClick={() => onNavigateToSection(action.action)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full flex items-center justify-between p-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="w-full flex items-center justify-between p-2 text-sm bg-gray-50 hover:bg-gray-100 dark:bg-[#242424] dark:hover:bg-[#2A2A2A] rounded-lg transition-colors"
                   >
-                    <span className="text-gray-700">{action.label}</span>
-                    <ArrowRight className="w-4 h-4 text-gray-400" />
+                    <span className="text-gray-700 dark:text-gray-300">{action.label}</span>
+                    <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-600" />
                   </motion.button>
                 ))}
               </div>
@@ -291,9 +291,9 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="bg-white rounded-xl p-6 shadow-sm border border-gray-200"
+        className="bg-white dark:bg-[#1A1A1A] rounded-xl p-6 shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800"
       >
-        <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">Quality Management Achievements</h3>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6 text-center">Quality Management Achievements</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {achievementStats.map((stat, index) => (
             <motion.div
@@ -304,13 +304,13 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
               className="text-center"
             >
               <div className="flex justify-center mb-3">
-                <div className="p-3 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full">
-                  <stat.icon className="w-6 h-6 text-purple-600" />
+                <div className="p-3 bg-gradient-to-r from-purple-100 dark:from-purple-900/30 to-blue-100 dark:to-blue-900/30 rounded-full">
+                  <stat.icon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
               </div>
-              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm font-medium text-gray-700 mb-1">{stat.label}</div>
-              <div className="text-xs text-gray-500">{stat.description}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">{stat.value}</div>
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{stat.label}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-500">{stat.description}</div>
             </motion.div>
           ))}
         </div>
@@ -324,7 +324,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
         className="text-center bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-8 text-white"
       >
         <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Quality Management?</h3>
-        <p className="text-purple-100 mb-6 max-w-2xl mx-auto">
+        <p className="text-purple-100 dark:text-purple-200 mb-6 max-w-2xl mx-auto">
           Select any quality management section above to begin leveraging AI-powered insights, 
           comprehensive test management, and predictive analytics for exceptional software quality.
         </p>
@@ -333,7 +333,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
             onClick={() => onNavigateToSection('defect-matching')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 bg-white text-purple-600 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
+            className="flex items-center space-x-2 bg-white dark:bg-[#1A1A1A] text-purple-600 dark:text-purple-400 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
           >
             <Brain className="w-5 h-5" />
             <span>Start with Defect Intelligence</span>
@@ -342,7 +342,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
             onClick={() => onNavigateToSection('test-execution')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 bg-white text-blue-600 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
+            className="flex items-center space-x-2 bg-white dark:bg-[#1A1A1A] text-blue-600 dark:text-blue-400 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
           >
             <TestTube className="w-5 h-5" />
             <span>Explore Test Management</span>
@@ -351,7 +351,7 @@ export default function IntelligentTestQualityLanding({ onNavigateToSection }: I
             onClick={() => onNavigateToSection('quality-metrics')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 bg-white text-green-600 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
+            className="flex items-center space-x-2 bg-white dark:bg-[#1A1A1A] text-green-600 dark:text-green-400 px-6 py-3 rounded-lg hover:shadow-lg transition-all font-medium"
           >
             <BarChart3 className="w-5 h-5" />
             <span>View Quality Insights</span>

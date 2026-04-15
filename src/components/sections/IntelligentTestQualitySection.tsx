@@ -244,29 +244,29 @@ export default function IntelligentTestQualitySection() {
         <div className="flex items-center space-x-3 mb-4">
           <Brain className="w-8 h-8" />
           <div>
-            <p className="text-sm font-medium text-purple-200 mb-1">Delivery Intelligence</p>
+            <p className="text-sm font-medium text-purple-200 dark:text-purple-300 mb-1">Delivery Intelligence</p>
             <h1 className="text-3xl font-bold">Test & Quality Intelligence</h1>
-            <p className="text-purple-100 text-lg">AI-powered quality assurance across the entire software delivery lifecycle</p>
+            <p className="text-purple-100 dark:text-purple-200 text-lg">AI-powered quality assurance across the entire software delivery lifecycle</p>
           </div>
         </div>
         
         {/* Quick Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
           <div className="bg-white/10 rounded-lg p-3 text-center">
-            <div className="text-2xl font-bold">12,847</div>
-            <div className="text-sm text-purple-100">Defect Matches</div>
+            <div className="text-2xl font-bold">3,247</div>
+            <div className="text-sm text-purple-100 dark:text-purple-200">Defect Matches</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold">96%</div>
-            <div className="text-sm text-purple-100">AI Accuracy</div>
+            <div className="text-sm text-purple-100 dark:text-purple-200">AI Accuracy</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold">94.2</div>
-            <div className="text-sm text-purple-100">Quality Score</div>
+            <div className="text-sm text-purple-100 dark:text-purple-200">Quality Score</div>
           </div>
           <div className="bg-white/10 rounded-lg p-3 text-center">
             <div className="text-2xl font-bold">75%</div>
-            <div className="text-sm text-purple-100">Time Saved</div>
+            <div className="text-sm text-purple-100 dark:text-purple-200">Time Saved</div>
           </div>
         </div>
       </div>
@@ -277,7 +277,7 @@ export default function IntelligentTestQualitySection() {
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-purple-600" />
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Interactive Test Suite Explorer</h3>
-            <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Dev Mode</span>
+            <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400">Dev Mode</span>
           </div>
           <TestQualityWorkspace />
         </div>
@@ -285,12 +285,12 @@ export default function IntelligentTestQualitySection() {
 
       {/* Main Navigation */}
       {activeTab !== 'overview' && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1">
+        <div className="bg-white dark:bg-[#1A1A1A] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-gray-800 p-1">
           <div className="flex flex-wrap gap-1">
             {mainTabs.map((tab) => {
               const IconComponent = tab.icon;
               const isActive = activeTab === tab.id;
-              
+
               return (
                 <motion.button
                   key={tab.id}
@@ -300,13 +300,13 @@ export default function IntelligentTestQualitySection() {
                   className={`flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                     isActive
                       ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
-                      : 'text-gray-600 hover:bg-gray-50'
+                      : 'text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-[#242424]'
                   }`}
                 >
                   <IconComponent className="w-4 h-4" />
                   <div className="text-left">
                     <div className="font-medium">{tab.label}</div>
-                    <div className={`text-xs ${isActive ? 'text-purple-100' : 'text-gray-500'}`}>
+                    <div className={`text-xs ${isActive ? 'text-purple-100' : 'text-gray-500 dark:text-gray-500'}`}>
                       {tab.description}
                     </div>
                   </div>

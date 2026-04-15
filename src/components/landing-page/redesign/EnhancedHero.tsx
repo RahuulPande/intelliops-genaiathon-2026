@@ -103,7 +103,7 @@ export default function EnhancedHero({ onNavigateToSection }: EnhancedHeroProps)
                     const el = document.getElementById('ai-usage');
                     el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
-                  className="flex items-center justify-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                  className="flex items-center justify-center space-x-2 bg-white dark:bg-[#1A1A1A] text-blue-600 dark:text-blue-400 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-50 dark:hover:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
                 >
                   <span>See How AI Powers It</span>
                   <ArrowRight className="w-5 h-5" />
@@ -162,27 +162,27 @@ export default function EnhancedHero({ onNavigateToSection }: EnhancedHeroProps)
 
               {/* Validation Badges */}
               <div className="space-y-3">
-                <div className="flex items-center space-x-3 bg-green-500/20 border border-green-400/30 rounded-lg p-3">
-                  <CheckCircle className="w-6 h-6 text-green-400" />
+                <div className="flex items-center space-x-3 bg-green-500/20 dark:bg-green-500/10 border border-green-400/30 dark:border-green-400/20 rounded-lg p-3">
+                  <CheckCircle className="w-6 h-6 text-green-400 dark:text-green-300" />
                   <div>
-                    <div className="text-white font-semibold">Enterprise Prototype</div>
-                    <div className="text-green-200 text-sm">Concepts inspired by real-world enterprise implementations</div>
+                    <div className="text-white dark:text-white font-semibold">Enterprise Prototype</div>
+                    <div className="text-green-200 dark:text-green-400 text-sm">Concepts inspired by real-world enterprise implementations</div>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-3 bg-purple-500/20 border border-purple-400/30 rounded-lg p-3">
-                  <Trophy className="w-6 h-6 text-purple-400" />
+                <div className="flex items-center space-x-3 bg-purple-500/20 dark:bg-purple-500/10 border border-purple-400/30 dark:border-purple-400/20 rounded-lg p-3">
+                  <Trophy className="w-6 h-6 text-purple-400 dark:text-purple-300" />
                   <div>
-                    <div className="text-white font-semibold">Built for GenAIathon 2026</div>
-                    <div className="text-purple-200 text-sm">GenAIathon 2026 Submission</div>
+                    <div className="text-white dark:text-white font-semibold">Built for GenAIathon 2026</div>
+                    <div className="text-purple-200 dark:text-purple-400 text-sm">GenAIathon 2026 Submission</div>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-3 bg-blue-500/20 border border-blue-400/30 rounded-lg p-3">
-                  <CheckCircle className="w-6 h-6 text-blue-400" />
+                <div className="flex items-center space-x-3 bg-blue-500/20 dark:bg-blue-500/10 border border-blue-400/30 dark:border-blue-400/20 rounded-lg p-3">
+                  <CheckCircle className="w-6 h-6 text-blue-400 dark:text-blue-300" />
                   <div>
-                    <div className="text-white font-semibold">AI/ML/RAG Architecture</div>
-                    <div className="text-blue-200 text-sm">RAG, ML, LLM &amp; NLP for delivery intelligence</div>
+                    <div className="text-white dark:text-white font-semibold">AI/ML/RAG Architecture</div>
+                    <div className="text-blue-200 dark:text-blue-400 text-sm">RAG, ML, LLM &amp; NLP for delivery intelligence</div>
                   </div>
                 </div>
               </div>

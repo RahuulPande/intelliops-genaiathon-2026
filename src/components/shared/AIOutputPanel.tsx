@@ -51,24 +51,31 @@ export default function AIOutputPanel({ generate, contextKey, techniques, title 
     wordsRef.current = getStreamingWords(genResult.text);
   }, []);
 
-  // Stream words one at a time — uses slice-based display to avoid
-  // duplication from React strict-mode double-invocation or stale closures
+  // Stream words one at a time — uses the original text as source of truth
+  // to prevent duplication from React strict-mode double-invocation or stale closures.
+  // We track how many tokens have been revealed via wordIndexRef, then display
+  // the corresponding substring of the original text to guarantee correct spacing.
   useEffect(() => {
-    if (!isStreaming || wordsRef.current.length === 0) return;
+    if (!isStreaming || !result || wordsRef.current.length === 0) return;
+
+    const fullText = result.text;
 
     const tick = () => {
       if (wordIndexRef.current >= wordsRef.current.length) {
+        setDisplayedText(fullText);
         setIsStreaming(false);
         return;
       }
       wordIndexRef.current++;
-      setDisplayedText(wordsRef.current.slice(0, wordIndexRef.current).join(''));
+      // Calculate the character length of revealed tokens and slice the original text
+      const charCount = wordsRef.current.slice(0, wordIndexRef.current).reduce((sum, tok) => sum + tok.length, 0);
+      setDisplayedText(fullText.substring(0, charCount));
       timerRef.current = setTimeout(tick, STREAM_DELAY_MS);
     };
 
     timerRef.current = setTimeout(tick, 400); // initial delay to show "Generating..."
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [isStreaming]);
+  }, [isStreaming, result]);
 
   // Trigger generation on contextKey change
   useEffect(() => {

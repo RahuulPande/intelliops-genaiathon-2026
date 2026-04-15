@@ -12,7 +12,7 @@ export default function QualityTrends() {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-[#1A1A1A] rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold mb-4">Quality Score Trends (30 Days)</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">

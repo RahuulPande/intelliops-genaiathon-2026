@@ -29,16 +29,16 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 };
 
 const insightStyles: Record<string, { border: string; bg: string; iconColor: string }> = {
-  critical: { border: 'border-red-300', bg: 'bg-red-50 dark:bg-red-900/20', iconColor: 'text-red-500' },
-  warning: { border: 'border-yellow-300', bg: 'bg-yellow-50 dark:bg-yellow-900/20', iconColor: 'text-yellow-500' },
-  info: { border: 'border-blue-300', bg: 'bg-blue-50 dark:bg-blue-900/20', iconColor: 'text-blue-500' },
-  success: { border: 'border-green-300', bg: 'bg-green-50 dark:bg-green-900/20', iconColor: 'text-green-500' },
+  critical: { border: 'border-red-300 dark:border-red-700', bg: 'bg-red-50 dark:bg-red-900/20', iconColor: 'text-red-500' },
+  warning: { border: 'border-yellow-300 dark:border-yellow-700', bg: 'bg-yellow-50 dark:bg-yellow-900/20', iconColor: 'text-yellow-500' },
+  info: { border: 'border-blue-300 dark:border-blue-700', bg: 'bg-blue-50 dark:bg-blue-900/20', iconColor: 'text-blue-500' },
+  success: { border: 'border-green-300 dark:border-green-700', bg: 'bg-green-50 dark:bg-green-900/20', iconColor: 'text-green-500' },
 };
 
 const severityColors: Record<string, string> = {
-  critical: 'bg-red-100 text-red-700 border-red-200',
-  warning: 'bg-yellow-100 text-yellow-700 border-yellow-200',
-  info: 'bg-blue-100 text-blue-700 border-blue-200',
+  critical: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-700',
+  warning: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border-yellow-200 dark:border-yellow-700',
+  info: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-700',
 };
 
 export default function PerformanceIntelligenceSection({ initialTab = 'performance-testing' }: PerformanceIntelligenceSectionProps) {
@@ -153,7 +153,7 @@ export default function PerformanceIntelligenceSection({ initialTab = 'performan
                     <Activity className={`w-5 h-5 ${anomaly.severity === 'critical' ? 'text-red-500' : 'text-yellow-500'}`} />
                     <div>
                       <h4 className="font-semibold text-gray-900 dark:text-white">{anomaly.service}</h4>
-                      <p className="text-xs text-gray-500">{anomaly.metric}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">{anomaly.metric}</p>
                     </div>
                   </div>
                   <span className={`text-xs font-bold px-2 py-1 rounded-full border ${severityColors[anomaly.severity]}`}>
@@ -166,14 +166,14 @@ export default function PerformanceIntelligenceSection({ initialTab = 'performan
                     <Database className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <span className="text-xs font-bold text-gray-600 dark:text-gray-400">Root Cause:</span>
-                      <p className="text-xs text-gray-700 dark:text-gray-300">{anomaly.rootCause}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{anomaly.rootCause}</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-2">
                     <TrendingUp className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <span className="text-xs font-bold text-gray-600 dark:text-gray-400">Prediction:</span>
-                      <p className="text-xs text-gray-700 dark:text-gray-300">{anomaly.prediction}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{anomaly.prediction}</p>
                     </div>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ export default function PerformanceIntelligenceSection({ initialTab = 'performan
                       <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">{insight.text}</p>
                       <div className="flex items-center space-x-3 mt-2">
                         <span className="text-xs font-bold bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded-full">{insight.source}</span>
-                        <span className="text-xs text-gray-500">Confidence: {(insight.confidence * 100).toFixed(0)}%</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-500">Confidence: {(insight.confidence * 100).toFixed(0)}%</span>
                       </div>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export default function PerformanceIntelligenceSection({ initialTab = 'performan
                       <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">{insight.text}</p>
                       <div className="flex items-center space-x-3 mt-2">
                         <span className="text-xs font-bold bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-2 py-0.5 rounded-full">{insight.source}</span>
-                        <span className="text-xs text-gray-500">Confidence: {(insight.confidence * 100).toFixed(0)}%</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-500">Confidence: {(insight.confidence * 100).toFixed(0)}%</span>
                       </div>
                     </div>
                   </div>
