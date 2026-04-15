@@ -54,7 +54,8 @@ export default function ImpactScreen() {
   const handleTryPlatform = () => {
     setIsTransitioning(true);
     setTimeout(() => {
-      window.location.href = '/login';
+      // User is already logged in (came here from login) — go to dashboard
+      window.location.href = '/';
     }, 2000);
   };
 

@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsAuthenticated(true);
         setRole('demo');
         setUser({ email: 'demo@intelliops.ai', role: 'demo', name: 'Demo User' });
-        router.replace('/');
+        router.replace('/showcase');
         return null; // success
       }
       return 'Invalid credentials. Use admin / IntelliOps@2026';
@@ -88,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(ROLE_STORAGE_KEY, 'demo');
     setIsAuthenticated(true);
     setRole('demo');
-    router.replace('/');
+    router.replace('/showcase');
     return null;
   }, [router]);
 
