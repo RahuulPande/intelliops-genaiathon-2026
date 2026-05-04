@@ -38,14 +38,8 @@ import LicenseSelector from '@/components/layouts/LicenseSelector';
 import { useRealTimeData, useDemoScenario } from '@/lib/hooks/useRealTimeData';
 import { demoScenarios, demoKeyboardShortcuts } from '@/lib/mock-data/scenarios';
 import useDashboardStore from '@/store/dashboard';
-import { useAuth } from '@/context/AuthContext';
-
-import DemoLoginPage from '@/app/login/page';
-
-// Auth-gated wrapper: unauthenticated users see login, authenticated see dashboard
+// Open access — always show dashboard (no login required)
 export default function Dashboard() {
-  const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) return <DemoLoginPage />;
   return <DashboardContent />;
 }
 
