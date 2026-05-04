@@ -19,25 +19,15 @@ const DemoThemeContext = createContext<DemoThemeContextType>({
 
 export function DemoThemeProvider({ children }: { children: React.ReactNode }) {
   const { isAdmin } = useAuth();
-  const [theme, setTheme] = useState<ThemeMode>('dark');
+  const [theme, setTheme] = useState<ThemeMode>('light');
 
-  // Initialize theme based on role
+  // Initialize theme — default to light, respect saved preference
   useEffect(() => {
-    if (isAdmin) {
-      // Admin: respect saved preference or system preference
-      const saved = localStorage.getItem('theme') as ThemeMode | null;
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const resolved = saved || (prefersDark ? 'dark' : 'light');
-      setTheme(resolved);
-      applyTheme(resolved);
-    } else {
-      // Demo: default to dark, respect saved demo preference
-      const savedDemo = localStorage.getItem('demo-theme') as ThemeMode | null;
-      const resolved = savedDemo || 'dark';
-      setTheme(resolved);
-      applyTheme(resolved);
-    }
-  }, [isAdmin]);
+    const savedDemo = localStorage.getItem('demo-theme') as ThemeMode | null;
+    const resolved = savedDemo || 'light';
+    setTheme(resolved);
+    applyTheme(resolved);
+  }, []);
 
   const applyTheme = (mode: ThemeMode) => {
     const root = document.documentElement;

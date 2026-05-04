@@ -101,7 +101,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/intelliops-logo.svg" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme'),d=localStorage.getItem('demo-theme'),r=localStorage.getItem('intelliops_role');var m=(r==='admin')?(t||'light'):(d||'dark');document.documentElement.className=m}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('demo-theme');document.documentElement.className=t||'light'}catch(e){}})()`,
           }}
         />
       </head>

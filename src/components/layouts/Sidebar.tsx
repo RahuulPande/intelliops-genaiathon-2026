@@ -585,18 +585,6 @@ export default function Sidebar({
               {isAdmin ? 'Development Mode' : 'Demo Mode'}
             </div>
           )}
-          <button
-            onClick={logout}
-            className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors mb-1 ${
-              isAdmin
-                ? 'text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 dark:hover:text-red-400'
-                : 'text-white/40 hover:text-white/70 hover:bg-white/5'
-            } ${isCollapsed ? 'justify-center' : ''}`}
-            title="Logout"
-          >
-            <LogOut className="w-3.5 h-3.5 flex-shrink-0" />
-            {!isCollapsed && <span className="text-xs font-medium">Logout</span>}
-          </button>
           {!isCollapsed && (
             <div className="text-center">
               <div className={`text-[9px] ${isAdmin ? 'text-gray-400 dark:text-gray-600' : 'text-white/20'}`}>
